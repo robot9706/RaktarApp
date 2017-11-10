@@ -17,6 +17,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "License", "License", "{F71E07FB-965E-4DCE-B8FD-CB829A06BCAD}"
 	ProjectSection(SolutionItems) = preProject
 		Etc\License\MetroUI.md = Etc\License\MetroUI.md
+		Etc\License\NewtonsoftJson.md = Etc\License\NewtonsoftJson.md
 	EndProjectSection
 EndProject
 Global
