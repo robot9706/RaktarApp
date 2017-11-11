@@ -1,5 +1,4 @@
 ﻿using MetroFramework;
-using MetroFramework.Forms;
 using Newtonsoft.Json;
 using Raktar.App.Data;
 using Raktar.Database;
@@ -10,7 +9,7 @@ using System.Windows.Forms;
 
 namespace Raktar.App.Forms
 {
-	public partial class SplashForm : MetroForm
+	public partial class SplashForm : AppForm
 	{
 		public SplashForm()
 		{
@@ -92,11 +91,15 @@ namespace Raktar.App.Forms
 				File.WriteAllText(configPath, JsonConvert.SerializeObject(config, Formatting.Indented));
 			}
 
+			Global.Config = config;
+
 			SetStatus("Csatlakozás az adatbázishoz...");
 
 			try
 			{
 				DatabaseConnection db = new DatabaseConnection(config.DatabaseServer, config.DatabaseName, config.DatabaseUser, config.DatabasePassword, config.ODBCDriver);
+
+				Global.Database = db;
 			}
 			catch (Exception ex)
 			{

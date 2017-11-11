@@ -28,20 +28,9 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.loaderBar = new MetroFramework.Controls.MetroProgressBar();
 			this.lblStatus = new MetroFramework.Controls.MetroLabel();
+			this.loaderSpinner = new MetroFramework.Controls.MetroProgressSpinner();
 			this.SuspendLayout();
-			// 
-			// loaderBar
-			// 
-			this.loaderBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.loaderBar.Location = new System.Drawing.Point(23, 126);
-			this.loaderBar.MarqueeAnimationSpeed = 10000;
-			this.loaderBar.Name = "loaderBar";
-			this.loaderBar.ProgressBarStyle = System.Windows.Forms.ProgressBarStyle.Marquee;
-			this.loaderBar.Size = new System.Drawing.Size(559, 23);
-			this.loaderBar.TabIndex = 0;
 			// 
 			// lblStatus
 			// 
@@ -50,18 +39,31 @@
 			this.lblStatus.FontSize = MetroFramework.MetroLabelSize.Tall;
 			this.lblStatus.Location = new System.Drawing.Point(23, 60);
 			this.lblStatus.Name = "lblStatus";
-			this.lblStatus.Size = new System.Drawing.Size(559, 41);
+			this.lblStatus.Size = new System.Drawing.Size(360, 41);
 			this.lblStatus.TabIndex = 1;
 			this.lblStatus.Text = "....";
 			this.lblStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			// 
+			// loaderSpinner
+			// 
+			this.loaderSpinner.Anchor = System.Windows.Forms.AnchorStyles.Top;
+			this.loaderSpinner.Location = new System.Drawing.Point(171, 104);
+			this.loaderSpinner.Maximum = 100;
+			this.loaderSpinner.Minimum = 1;
+			this.loaderSpinner.Name = "loaderSpinner";
+			this.loaderSpinner.Size = new System.Drawing.Size(64, 64);
+			this.loaderSpinner.Speed = 2F;
+			this.loaderSpinner.TabIndex = 2;
+			this.loaderSpinner.UseSelectable = true;
+			this.loaderSpinner.Value = 25;
 			// 
 			// SplashForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(609, 170);
+			this.ClientSize = new System.Drawing.Size(410, 180);
+			this.Controls.Add(this.loaderSpinner);
 			this.Controls.Add(this.lblStatus);
-			this.Controls.Add(this.loaderBar);
 			this.MaximizeBox = false;
 			this.Movable = false;
 			this.Name = "SplashForm";
@@ -76,8 +78,7 @@
 		}
 
 		#endregion
-
-		private MetroFramework.Controls.MetroProgressBar loaderBar;
 		private MetroFramework.Controls.MetroLabel lblStatus;
+		private MetroFramework.Controls.MetroProgressSpinner loaderSpinner;
 	}
 }

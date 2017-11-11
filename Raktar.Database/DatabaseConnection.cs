@@ -42,14 +42,19 @@ namespace Raktar.Database
 			_database = null;
 		}
 
-		public List<T> SelectAll<T>(string from) where T: class
+		private ObjectParser GetParser<T>()
 		{
 			Type objectType = typeof(T);
 
 			if (!_parsers.ContainsKey(objectType))
 				_parsers.Add(objectType, new ObjectParser(objectType));
 
-			ObjectParser parser = _parsers[objectType];
+			return _parsers[objectType];
+		}
+
+		public List<T> SelectAll<T>(string from)
+		{
+			ObjectParser parser = GetParser<T>();
 
 			List<T> result = new List<T>();
 
@@ -69,6 +74,82 @@ namespace Raktar.Database
 			}
 
 			return result;
+		}
+
+		public T SelectOne<T>(string from, Dictionary<string, object> conditions)
+		{
+			List<T> sel = Select<T>(from, conditions);
+
+			if (sel.Count == 0)
+				return default(T);
+
+			return sel[0];
+		}
+
+		public List<T> Select<T>(string from, Dictionary<string, object> conditions)
+		{
+			ObjectParser parser = GetParser<T>();
+
+			List<T> result = new List<T>();
+
+			List<string> conds = new List<string>();
+			foreach (KeyValuePair<string, object> c in conditions)
+			{
+				conds.Add(c.Key + "=" + ObjectParser.FormatPrimitiveValue(c.Value));
+			}
+
+			string query = "SELECT * FROM `" + from + "` WHERE " + String.Join(" AND ", conds);
+
+			using (OdbcCommand command = new OdbcCommand(query, _database))
+			{
+				using (OdbcDataReader reader = command.ExecuteReader())
+				{
+					while (reader.Read())
+					{
+						T item = parser.ParseItem<T>(reader);
+
+						result.Add(item);
+					}
+				}
+			}
+
+			return result;
+		}
+
+		public bool InsertInto<T>(string table, T newValue)
+		{
+			ObjectParser parser = GetParser<T>();
+
+			string query = "INSERT INTO " + table + " " + parser.BuildInsertStatement<T>(newValue) + ";";
+
+			using (OdbcCommand command = new OdbcCommand(query, _database))
+			{
+				return (command.ExecuteNonQuery() != 0);
+			}
+		}
+
+		public bool DeleteFrom<T>(string table, T value, string[] conditionColumns = null)
+		{
+			ObjectParser parser = GetParser<T>();
+
+			string query = "DELETE FROM " + table + " WHERE " + parser.BuildKeyCondition<T>(value, conditionColumns) + ";";
+
+			using (OdbcCommand command = new OdbcCommand(query, _database))
+			{
+				return (command.ExecuteNonQuery() != 0);
+			}
+		}
+
+		public bool Update<T>(string table, T value)
+		{
+			ObjectParser parser = GetParser<T>();
+
+			string query = "UPDATE " + table + " SET " + parser.BuildValueConditions<T>(value) + " WHERE " + parser.BuildKeyCondition<T>(value, null) + ";";
+
+			using (OdbcCommand command = new OdbcCommand(query, _database))
+			{
+				return (command.ExecuteNonQuery() != 0);
+			}
 		}
 	}
 }

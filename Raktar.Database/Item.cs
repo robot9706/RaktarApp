@@ -2,19 +2,19 @@
 {
     public class Item
     {
-		[DatabaseColumn(0)]
+		[DatabaseColumn(0, "ItemID")]
 		public int ID;
 
-		[DatabaseColumn(1)]
+		[DatabaseColumn(1, "Name")]
 		public string Name;
 
-		[DatabaseColumn(2)]
+		[DatabaseColumn(2, "Price")]
 		public double Price;
 
-		[DatabaseColumn(3)]
+		[DatabaseColumn(3, "Description")]
 		public string Description;
 
-		[DatabaseColumn(4)]
+		[DatabaseColumn(4, "CategoryID")]
 		public int CategoryID;
 	}
 }

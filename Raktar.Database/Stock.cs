@@ -2,13 +2,13 @@
 {
 	public class Stock
 	{
-		[DatabaseColumn(0)]
+		[DatabaseColumn(0, "ItemID")]
 		public int ItemID;
 
-		[DatabaseColumn(1)]
+		[DatabaseColumn(1, "Warehouse")]
 		public int Warehouse;
 
-		[DatabaseColumn(2)]
+		[DatabaseColumn(2, "Count")]
 		public int Count;
 	}
 }
