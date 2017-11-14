@@ -44,20 +44,9 @@ namespace Raktar.App.Forms
 
 					if (Global.Database.InsertInto<Category>("category", ct))
 					{
-						Category ctWithID = Global.Database.SelectOne<Category>("category", new Dictionary<string, object>() { { "Name", ct.Name } });
+						listCategory.Items.Add(ct);
 
-						if (ctWithID == null)
-						{
-							Global.Database.DeleteFrom<Category>("category", ct, new string[] { "Name" });
-
-							Error("Hiba \"" + ct.Name + "\" beillesztése közben!", Text);
-						}
-						else
-						{
-							listCategory.Items.Add(ctWithID);
-
-							Info("\"" + ct.Name + "\" hozzáadva!", Text);
-						}
+						Info("\"" + ct.Name + "\" hozzáadva!", Text);
 					}
 				}
 			}

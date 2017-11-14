@@ -13,7 +13,7 @@ namespace Raktar.App.Forms
 
 		public static void Apply(MetroForm form, MetroStyleExtender extender)
 		{
-			form.Theme = MetroThemeStyle.Dark;
+			form.Theme = MetroThemeStyle.Light;
 			form.Style = MetroColorStyle.Blue;
 
 			MetroStyleManager mgr = new MetroStyleManager(form.Container);
@@ -28,6 +28,8 @@ namespace Raktar.App.Forms
 				extender.Style = mgr.Style;
 				extender.Theme = mgr.Theme;
 			}
+
+			form.ShadowType = MetroFormShadowType.DropShadow;
 
 			mgr.Update();
 		}

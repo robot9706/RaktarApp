@@ -4,13 +4,13 @@ namespace Raktar.Database
 {
 	public class Shipment
 	{
-		[DatabaseColumn(0, "WarehouseFrom")]
+		[DatabaseColumn(0, "WarehouseFrom", true, false)]
 		public int WarehouseFrom;
 
-		[DatabaseColumn(1, "WarehouseT")]
+		[DatabaseColumn(1, "WarehouseT", true, false)]
 		public int WarehouseTo;
 
-		[DatabaseColumn(2, "ItemID")]
+		[DatabaseColumn(2, "ItemID", true, false)]
 		public int ItemID;
 
 		[DatabaseColumn(3, "Date")]

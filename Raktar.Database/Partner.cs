@@ -2,7 +2,7 @@
 {
 	public class Partner
 	{
-		[DatabaseColumn(0, "ID")]
+		[DatabaseColumn(0, "ID", true, true)]
 		public int ID;
 
 		[DatabaseColumn(1, "Name")]

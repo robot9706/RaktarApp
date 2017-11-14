@@ -21,6 +21,12 @@ namespace Raktar.Database
 
 		private Dictionary<int, ColumnInfo> _fields;
 
+		private int _autoIncrementKey = -1;
+		public bool HasAutoIncrementKey
+		{
+			get { return (_autoIncrementKey != -1); }
+		}
+
 		public ObjectParser(Type type)
 		{
 			_fields = new Dictionary<int, ColumnInfo>();
@@ -42,6 +48,11 @@ namespace Raktar.Database
 						IsAutoIncrement = attribute.IsAutoIncrement,
 						IsKey = attribute.IsKey
 					});
+
+					if (attribute.IsKey && attribute.IsAutoIncrement)
+					{
+						_autoIncrementKey = attribute.ColumnIndex;
+					}
 				}
 			}
 		}
@@ -128,6 +139,14 @@ namespace Raktar.Database
 			}
 
 			return String.Join(", ", valueList);
+		}
+
+		public void SetAutoIncrementKey<T>(T value, int key)
+		{
+			if (!HasAutoIncrementKey)
+				return;
+
+			_fields[_autoIncrementKey].Field.SetValue(value, key);
 		}
 	}
 }

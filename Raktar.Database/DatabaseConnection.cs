@@ -124,8 +124,16 @@ namespace Raktar.Database
 
 			using (OdbcCommand command = new OdbcCommand(query, _database))
 			{
-				return (command.ExecuteNonQuery() != 0);
+				if (command.ExecuteNonQuery() != 0)
+				{
+					if (parser.HasAutoIncrementKey)
+						parser.SetAutoIncrementKey<T>(newValue, GetLastAutoIncrementID());
+
+					return true;
+				}
 			}
+
+			return false;
 		}
 
 		public bool DeleteFrom<T>(string table, T value, string[] conditionColumns = null)
@@ -150,6 +158,22 @@ namespace Raktar.Database
 			{
 				return (command.ExecuteNonQuery() != 0);
 			}
+		}
+
+		public int GetLastAutoIncrementID()
+		{
+			string query = "SELECT LAST_INSERT_ID()";
+
+			using (OdbcCommand command = new OdbcCommand(query, _database))
+			{
+				using (OdbcDataReader reader = command.ExecuteReader())
+				{
+					if (reader.HasRows)
+						return reader.GetInt32(0);
+				}
+			}
+
+			return 0;
 		}
 	}
 }
