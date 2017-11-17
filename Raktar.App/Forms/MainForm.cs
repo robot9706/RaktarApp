@@ -17,6 +17,7 @@ namespace Raktar.App.Forms
 		private void MainForm_Load(object sender, System.EventArgs e)
 		{
 			LoadWarehouseTab();
+			LoadItemsTab();
 		}
 
 		#region Warehouse tab
@@ -35,12 +36,12 @@ namespace Raktar.App.Forms
 			DataGridViewRow row = new DataGridViewRow();
 			row.CreateCells(gridWarehouse);
 
-			UpdateRowCells(row, w);
+			UpdateWarehouseRowCells(row, w);
 
 			gridWarehouse.Rows.Add(row);
 		}
 
-		private void UpdateRowCells(DataGridViewRow row, Warehouse w)
+		private void UpdateWarehouseRowCells(DataGridViewRow row, Warehouse w)
 		{
 			row.Cells[0].Value = w.Name;
 			row.Cells[1].Value = w.City;
@@ -81,9 +82,11 @@ namespace Raktar.App.Forms
 			{
 				if (whEdit.ShowDialog(this) == DialogResult.OK)
 				{
-					if(Global.Database.InsertInto<Warehouse>("warehouse", whEdit.EditedWarehouse))
+					Warehouse newWarehouse = whEdit.EditedWarehouse;
+
+					if (Global.Database.InsertInto<Warehouse>("warehouse", newWarehouse))
 					{
-						AddWarehouseEntry(whEdit.EditedWarehouse);
+						AddWarehouseEntry(newWarehouse);
 					}
 					else
 					{
@@ -106,11 +109,113 @@ namespace Raktar.App.Forms
 				{
 					if (Global.Database.Update<Warehouse>("warehouse", whEdit.EditedWarehouse))
 					{
-						UpdateRowCells(row, whEdit.EditedWarehouse);
+						UpdateWarehouseRowCells(row, whEdit.EditedWarehouse);
 					}
 					else
 					{
-						Error("Hiba a \"" + whEdit.EditedWarehouse.Name + "\" frissítése közben!", "Hiba");
+						Error("Hiba a(z) \"" + whEdit.EditedWarehouse.Name + "\" frissítése közben!", "Hiba");
+					}
+				}
+			}
+		}
+		#endregion
+
+		#region Items tab
+		private void LoadItemsTab()
+		{
+			List<Item> items = Global.Database.SelectAll<Item>("items");
+
+			foreach (Item w in items)
+			{
+				AddItemEntry(w);
+			}
+		}
+
+		private void AddItemEntry(Item i)
+		{
+			DataGridViewRow row = new DataGridViewRow();
+			row.CreateCells(gridItems);
+
+			UpdateItemRowCells(row, i);
+
+			gridItems.Rows.Add(row);
+		}
+
+		private void UpdateItemRowCells(DataGridViewRow row, Item i)
+		{
+			Category category = Global.Database.SelectOne<Category>("category", new Dictionary<string, object>() { { "CategoryID", i.CategoryID } });
+			string categoryName = (category != null ? category.Name : "?");
+
+			row.Cells[0].Value = i.Name;
+			row.Cells[1].Value = i.Price.ToString();
+			row.Cells[2].Value = categoryName;
+			row.Cells[3].Value = i.Description;
+
+			row.Tag = i;
+		}
+
+		private void gridItems_SelectionChanged(object sender, System.EventArgs e)
+		{
+			btnDeleteItem.Enabled = (gridItems.SelectedRows.Count > 0);
+		}
+
+		private void btnDeleteItem_Click(object sender, System.EventArgs e)
+		{
+			DataGridViewRow[] selected = new DataGridViewRow[gridItems.SelectedRows.Count];
+			gridItems.SelectedRows.CopyTo(selected, 0);
+
+			foreach (DataGridViewRow row in selected)
+			{
+				Item item = (Item)row.Tag;
+
+				if (!Global.Database.DeleteFrom<Item>("items", item))
+				{
+					Error("Hiba a sor törlése közben! \"" + item.Name + "\"", "Hiba!");
+					return;
+				}
+
+				gridItems.Rows.Remove(row);
+			}
+		}
+
+		private void btnNewItem_Click(object sender, System.EventArgs e)
+		{
+			using (ItemEditForm edit = new ItemEditForm())
+			{
+				if (edit.ShowDialog(this) == DialogResult.OK)
+				{
+					Item newItem = edit.EditedItem;
+
+					if (Global.Database.InsertInto<Item>("items", newItem))
+					{
+						AddItemEntry(newItem);
+					}
+					else
+					{
+						Error("Hiba a(z) \"" + edit.EditedItem.Name + "\" hozzáadása közben!", "Hiba!");
+					}
+				}
+			}
+		}
+
+		private void gridItems_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+		{
+			if (e.RowIndex < 0 || e.RowIndex >= gridItems.Rows.Count)
+				return;
+
+			DataGridViewRow row = gridItems.Rows[e.RowIndex];
+
+			using (ItemEditForm itemEdit = new ItemEditForm((Item)row.Tag))
+			{
+				if (itemEdit.ShowDialog(this) == DialogResult.OK)
+				{
+					if (Global.Database.Update<Item>("items", itemEdit.EditedItem))
+					{
+						UpdateItemRowCells(row, itemEdit.EditedItem);
+					}
+					else
+					{
+						Error("Hiba a(z) \"" + itemEdit.EditedItem.Name + "\" frissítése közben!", "Hiba");
 					}
 				}
 			}

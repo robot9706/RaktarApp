@@ -54,6 +54,8 @@
 			// 
 			// tbName
 			// 
+			this.tbName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			// 
 			// 
 			// 
@@ -85,6 +87,8 @@
 			// 
 			// tbCity
 			// 
+			this.tbCity.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			// 
 			// 
 			// 
@@ -134,6 +138,8 @@
 			// 
 			// tbStreet
 			// 
+			this.tbStreet.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			// 
 			// 
 			// 
@@ -239,7 +245,7 @@
 			this.tbStreetNum.ShortcutsEnabled = true;
 			this.tbStreetNum.Size = new System.Drawing.Size(111, 23);
 			this.tbStreetNum.TabIndex = 10;
-			this.tbStreetNum.Tag = "lblStreetNumError";
+			this.tbStreetNum.Tag = "";
 			this.tbStreetNum.UseSelectable = true;
 			this.tbStreetNum.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
 			this.tbStreetNum.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
@@ -247,6 +253,7 @@
 			// 
 			// btnOK
 			// 
+			this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnOK.Enabled = false;
 			this.btnOK.Location = new System.Drawing.Point(365, 198);
 			this.btnOK.Name = "btnOK";
@@ -258,6 +265,7 @@
 			// 
 			// btnCancel
 			// 
+			this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnCancel.Location = new System.Drawing.Point(235, 198);
 			this.btnCancel.Name = "btnCancel";
 			this.btnCancel.Size = new System.Drawing.Size(124, 38);
@@ -268,6 +276,8 @@
 			// 
 			// lblStreetNumError
 			// 
+			this.lblStreetNumError.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.lblStreetNumError.AutoSize = true;
 			this.lblStreetNumError.FontSize = MetroFramework.MetroLabelSize.Tall;
 			this.lblStreetNumError.FontWeight = MetroFramework.MetroLabelWeight.Bold;

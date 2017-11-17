@@ -104,16 +104,13 @@ namespace Raktar.Database
 			return "(" + String.Join(", ", columns) + ") VALUES (" + String.Join(", ", values) + ")";
 		}
 
-		public string BuildKeyCondition<T>(T value, string[] conds)
+		public string BuildKeyCondition<T>(T value)
 		{
 			List<string> conditionList = new List<string>();
 
 			foreach (KeyValuePair<int, ColumnInfo> pair in _fields)
 			{
-				if (!pair.Value.IsKey && conds == null)
-					continue;
-
-				if (conds != null && !conds.Contains(pair.Value.Name))
+				if (!pair.Value.IsKey)
 					continue;
 
 				object fieldValue = pair.Value.Field.GetValue(value);

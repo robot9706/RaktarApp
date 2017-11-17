@@ -3,7 +3,7 @@
 	public class Category
 	{
 		[DatabaseColumn(0, "CategoryID", true, true)]
-		public int ID;
+		public int CategoryID;
 
 		[DatabaseColumn(1, "Name")]
 		public string Name;

@@ -67,23 +67,10 @@ namespace Raktar.App.Forms
 		{
 			MetroTextBox box = (MetroTextBox)sender;
 
-			if (box.Tag is string)
-			{
-				Control[] ctrl = Controls.Find((string)box.Tag, true);
+			int dump;
+			lblStreetNumError.Visible = (!Int32.TryParse(box.Text, out dump));
 
-				if (ctrl.Length > 0)
-				{
-					box.Tag = ctrl[0];
-				}
-			}
-
-			if (box.Tag != null)
-			{
-				int dump;
-				((MetroLabel)box.Tag).Visible = (!Int32.TryParse(box.Text, out dump));
-
-				ValidateInput();
-			}
+			ValidateInput();
 		}
 
 		private void ValidateInput()

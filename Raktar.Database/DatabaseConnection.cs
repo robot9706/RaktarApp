@@ -136,11 +136,11 @@ namespace Raktar.Database
 			return false;
 		}
 
-		public bool DeleteFrom<T>(string table, T value, string[] conditionColumns = null)
+		public bool DeleteFrom<T>(string table, T value)
 		{
 			ObjectParser parser = GetParser<T>();
 
-			string query = "DELETE FROM " + table + " WHERE " + parser.BuildKeyCondition<T>(value, conditionColumns) + ";";
+			string query = "DELETE FROM " + table + " WHERE " + parser.BuildKeyCondition<T>(value) + ";";
 
 			using (OdbcCommand command = new OdbcCommand(query, _database))
 			{
@@ -152,7 +152,7 @@ namespace Raktar.Database
 		{
 			ObjectParser parser = GetParser<T>();
 
-			string query = "UPDATE " + table + " SET " + parser.BuildValueConditions<T>(value) + " WHERE " + parser.BuildKeyCondition<T>(value, null) + ";";
+			string query = "UPDATE " + table + " SET " + parser.BuildValueConditions<T>(value) + " WHERE " + parser.BuildKeyCondition<T>(value) + ";";
 
 			using (OdbcCommand command = new OdbcCommand(query, _database))
 			{
