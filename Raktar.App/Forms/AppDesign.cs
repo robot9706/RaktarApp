@@ -6,6 +6,9 @@ namespace Raktar.App.Forms
 {
 	class AppDesign
 	{
+		public static MetroThemeStyle AppStyle = MetroThemeStyle.Light;
+		public static MetroColorStyle AppTheme = MetroColorStyle.Blue;
+
 		public static void Apply(MetroForm form)
 		{
 			Apply(form, null);
@@ -13,8 +16,8 @@ namespace Raktar.App.Forms
 
 		public static void Apply(MetroForm form, MetroStyleExtender extender)
 		{
-			form.Theme = MetroThemeStyle.Light;
-			form.Style = MetroColorStyle.Blue;
+			form.Theme = AppStyle;
+			form.Style = AppTheme;
 
 			MetroStyleManager mgr = new MetroStyleManager(form.Container);
 

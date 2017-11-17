@@ -67,8 +67,8 @@ namespace Raktar.App.Forms
 		{
 			MetroTextBox box = (MetroTextBox)sender;
 
-			int dump;
-			lblStreetNumError.Visible = (!Int32.TryParse(box.Text, out dump));
+			int test;
+			lblStreetNumError.Visible = (!Int32.TryParse(box.Text, out test) && test >= 0);
 
 			ValidateInput();
 		}

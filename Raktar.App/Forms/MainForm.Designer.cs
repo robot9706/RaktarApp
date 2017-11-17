@@ -34,11 +34,12 @@
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.tabs = new MetroFramework.Controls.MetroTabControl();
 			this.pageWarehouse = new System.Windows.Forms.TabPage();
 			this.panelWarehouseTab = new MetroFramework.Controls.MetroPanel();
-			this.btnDeleteWarehouse = new MetroFramework.Controls.MetroButton();
-			this.btnNewWarehouse = new MetroFramework.Controls.MetroButton();
 			this.gridWarehouse = new MetroFramework.Controls.MetroGrid();
 			this.warehouseNAme = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.warehouseCity = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -47,13 +48,27 @@
 			this.warehouseStreetNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.pageItems = new System.Windows.Forms.TabPage();
 			this.panelItems = new System.Windows.Forms.Panel();
+			this.btnDeleteItem = new MetroFramework.Controls.MetroButton();
+			this.btnNewItem = new MetroFramework.Controls.MetroButton();
 			this.gridItems = new MetroFramework.Controls.MetroGrid();
 			this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.btnDeleteItem = new MetroFramework.Controls.MetroButton();
-			this.btnNewItem = new MetroFramework.Controls.MetroButton();
+			this.pagePartners = new System.Windows.Forms.TabPage();
+			this.panelPartners = new MetroFramework.Controls.MetroPanel();
+			this.gridPartners = new MetroFramework.Controls.MetroGrid();
+			this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.columnPostCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.columnStreet = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.columnStreetNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.btnNewWarehouse = new MetroFramework.Controls.MetroButton();
+			this.btnDeleteWarehouse = new MetroFramework.Controls.MetroButton();
+			this.btnDeletePartner = new MetroFramework.Controls.MetroButton();
+			this.btnNewPartner = new MetroFramework.Controls.MetroButton();
 			this.tabs.SuspendLayout();
 			this.pageWarehouse.SuspendLayout();
 			this.panelWarehouseTab.SuspendLayout();
@@ -61,6 +76,9 @@
 			this.pageItems.SuspendLayout();
 			this.panelItems.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.gridItems)).BeginInit();
+			this.pagePartners.SuspendLayout();
+			this.panelPartners.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.gridPartners)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// tabs
@@ -70,9 +88,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.tabs.Controls.Add(this.pageWarehouse);
 			this.tabs.Controls.Add(this.pageItems);
+			this.tabs.Controls.Add(this.pagePartners);
 			this.tabs.Location = new System.Drawing.Point(25, 63);
 			this.tabs.Name = "tabs";
-			this.tabs.SelectedIndex = 1;
+			this.tabs.SelectedIndex = 2;
 			this.tabs.Size = new System.Drawing.Size(953, 541);
 			this.tabs.TabIndex = 0;
 			this.tabs.UseSelectable = true;
@@ -102,29 +121,6 @@
 			this.panelWarehouseTab.VerticalScrollbarBarColor = true;
 			this.panelWarehouseTab.VerticalScrollbarHighlightOnWheel = false;
 			this.panelWarehouseTab.VerticalScrollbarSize = 10;
-			// 
-			// btnDeleteWarehouse
-			// 
-			this.btnDeleteWarehouse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnDeleteWarehouse.Enabled = false;
-			this.btnDeleteWarehouse.Location = new System.Drawing.Point(704, 466);
-			this.btnDeleteWarehouse.Name = "btnDeleteWarehouse";
-			this.btnDeleteWarehouse.Size = new System.Drawing.Size(116, 30);
-			this.btnDeleteWarehouse.TabIndex = 4;
-			this.btnDeleteWarehouse.Text = "Raktár törlése";
-			this.btnDeleteWarehouse.UseSelectable = true;
-			this.btnDeleteWarehouse.Click += new System.EventHandler(this.btnDeleteWarehouse_Click);
-			// 
-			// btnNewWarehouse
-			// 
-			this.btnNewWarehouse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnNewWarehouse.Location = new System.Drawing.Point(826, 466);
-			this.btnNewWarehouse.Name = "btnNewWarehouse";
-			this.btnNewWarehouse.Size = new System.Drawing.Size(116, 30);
-			this.btnNewWarehouse.TabIndex = 3;
-			this.btnNewWarehouse.Text = "Új raktár";
-			this.btnNewWarehouse.UseSelectable = true;
-			this.btnNewWarehouse.Click += new System.EventHandler(this.btnNewWarehouse_Click);
 			// 
 			// gridWarehouse
 			// 
@@ -236,6 +232,29 @@
 			this.panelItems.Size = new System.Drawing.Size(945, 499);
 			this.panelItems.TabIndex = 1;
 			// 
+			// btnDeleteItem
+			// 
+			this.btnDeleteItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnDeleteItem.Enabled = false;
+			this.btnDeleteItem.Location = new System.Drawing.Point(704, 466);
+			this.btnDeleteItem.Name = "btnDeleteItem";
+			this.btnDeleteItem.Size = new System.Drawing.Size(116, 30);
+			this.btnDeleteItem.TabIndex = 6;
+			this.btnDeleteItem.Text = "Cikk törlése";
+			this.btnDeleteItem.UseSelectable = true;
+			this.btnDeleteItem.Click += new System.EventHandler(this.btnDeleteItem_Click);
+			// 
+			// btnNewItem
+			// 
+			this.btnNewItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnNewItem.Location = new System.Drawing.Point(826, 466);
+			this.btnNewItem.Name = "btnNewItem";
+			this.btnNewItem.Size = new System.Drawing.Size(116, 30);
+			this.btnNewItem.TabIndex = 5;
+			this.btnNewItem.Text = "Új cikk";
+			this.btnNewItem.UseSelectable = true;
+			this.btnNewItem.Click += new System.EventHandler(this.btnNewItem_Click);
+			// 
 			// gridItems
 			// 
 			this.gridItems.AllowUserToAddRows = false;
@@ -315,28 +334,177 @@
 			this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
 			this.dataGridViewTextBoxColumn4.ReadOnly = true;
 			// 
-			// btnDeleteItem
+			// pagePartners
 			// 
-			this.btnDeleteItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnDeleteItem.Enabled = false;
-			this.btnDeleteItem.Location = new System.Drawing.Point(704, 466);
-			this.btnDeleteItem.Name = "btnDeleteItem";
-			this.btnDeleteItem.Size = new System.Drawing.Size(116, 30);
-			this.btnDeleteItem.TabIndex = 6;
-			this.btnDeleteItem.Text = "Cikk törlése";
-			this.btnDeleteItem.UseSelectable = true;
-			this.btnDeleteItem.Click += new System.EventHandler(this.btnDeleteItem_Click);
+			this.pagePartners.Controls.Add(this.panelPartners);
+			this.pagePartners.Location = new System.Drawing.Point(4, 38);
+			this.pagePartners.Name = "pagePartners";
+			this.pagePartners.Size = new System.Drawing.Size(945, 499);
+			this.pagePartners.TabIndex = 2;
+			this.pagePartners.Text = "Partnerek";
 			// 
-			// btnNewItem
+			// panelPartners
 			// 
-			this.btnNewItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnNewItem.Location = new System.Drawing.Point(826, 466);
-			this.btnNewItem.Name = "btnNewItem";
-			this.btnNewItem.Size = new System.Drawing.Size(116, 30);
-			this.btnNewItem.TabIndex = 5;
-			this.btnNewItem.Text = "Új cikk";
-			this.btnNewItem.UseSelectable = true;
-			this.btnNewItem.Click += new System.EventHandler(this.btnNewItem_Click);
+			this.panelPartners.Controls.Add(this.btnDeletePartner);
+			this.panelPartners.Controls.Add(this.btnNewPartner);
+			this.panelPartners.Controls.Add(this.gridPartners);
+			this.panelPartners.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.panelPartners.HorizontalScrollbarBarColor = true;
+			this.panelPartners.HorizontalScrollbarHighlightOnWheel = false;
+			this.panelPartners.HorizontalScrollbarSize = 10;
+			this.panelPartners.Location = new System.Drawing.Point(0, 0);
+			this.panelPartners.Name = "panelPartners";
+			this.panelPartners.Size = new System.Drawing.Size(945, 499);
+			this.panelPartners.TabIndex = 1;
+			this.panelPartners.VerticalScrollbarBarColor = true;
+			this.panelPartners.VerticalScrollbarHighlightOnWheel = false;
+			this.panelPartners.VerticalScrollbarSize = 10;
+			// 
+			// gridPartners
+			// 
+			this.gridPartners.AllowUserToAddRows = false;
+			this.gridPartners.AllowUserToDeleteRows = false;
+			this.gridPartners.AllowUserToResizeRows = false;
+			this.gridPartners.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+			this.gridPartners.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+			this.gridPartners.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			this.gridPartners.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+			this.gridPartners.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+			dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+			dataGridViewCellStyle7.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			dataGridViewCellStyle7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+			dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+			dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+			dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.gridPartners.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+			this.gridPartners.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.gridPartners.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn5,
+            this.dataGridViewTextBoxColumn6,
+            this.dataGridViewTextBoxColumn7,
+            this.dataGridViewTextBoxColumn8,
+            this.columnPostCode,
+            this.columnStreet,
+            this.columnStreetNum});
+			dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+			dataGridViewCellStyle8.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			dataGridViewCellStyle8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
+			dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+			dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+			dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+			this.gridPartners.DefaultCellStyle = dataGridViewCellStyle8;
+			this.gridPartners.EnableHeadersVisualStyles = false;
+			this.gridPartners.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.gridPartners.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+			this.gridPartners.Location = new System.Drawing.Point(3, 3);
+			this.gridPartners.Name = "gridPartners";
+			this.gridPartners.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+			dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+			dataGridViewCellStyle9.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			dataGridViewCellStyle9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+			dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+			dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+			dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.gridPartners.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
+			this.gridPartners.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+			this.gridPartners.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+			this.gridPartners.Size = new System.Drawing.Size(939, 454);
+			this.gridPartners.TabIndex = 4;
+			this.gridPartners.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridPartners_CellDoubleClick);
+			this.gridPartners.SelectionChanged += new System.EventHandler(this.gridPartners_SelectionChanged);
+			// 
+			// dataGridViewTextBoxColumn5
+			// 
+			this.dataGridViewTextBoxColumn5.HeaderText = "Név";
+			this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+			this.dataGridViewTextBoxColumn5.ReadOnly = true;
+			// 
+			// dataGridViewTextBoxColumn6
+			// 
+			this.dataGridViewTextBoxColumn6.HeaderText = "Telefon";
+			this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+			this.dataGridViewTextBoxColumn6.ReadOnly = true;
+			// 
+			// dataGridViewTextBoxColumn7
+			// 
+			this.dataGridViewTextBoxColumn7.HeaderText = "Email";
+			this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+			this.dataGridViewTextBoxColumn7.ReadOnly = true;
+			this.dataGridViewTextBoxColumn7.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+			this.dataGridViewTextBoxColumn7.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+			// 
+			// dataGridViewTextBoxColumn8
+			// 
+			this.dataGridViewTextBoxColumn8.HeaderText = "Város";
+			this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
+			this.dataGridViewTextBoxColumn8.ReadOnly = true;
+			// 
+			// columnPostCode
+			// 
+			this.columnPostCode.HeaderText = "Irányítószám";
+			this.columnPostCode.Name = "columnPostCode";
+			this.columnPostCode.ReadOnly = true;
+			// 
+			// columnStreet
+			// 
+			this.columnStreet.HeaderText = "Utca";
+			this.columnStreet.Name = "columnStreet";
+			this.columnStreet.ReadOnly = true;
+			// 
+			// columnStreetNum
+			// 
+			this.columnStreetNum.HeaderText = "Házszám";
+			this.columnStreetNum.Name = "columnStreetNum";
+			this.columnStreetNum.ReadOnly = true;
+			// 
+			// btnNewWarehouse
+			// 
+			this.btnNewWarehouse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnNewWarehouse.Location = new System.Drawing.Point(826, 466);
+			this.btnNewWarehouse.Name = "btnNewWarehouse";
+			this.btnNewWarehouse.Size = new System.Drawing.Size(116, 30);
+			this.btnNewWarehouse.TabIndex = 3;
+			this.btnNewWarehouse.Text = "Új raktár";
+			this.btnNewWarehouse.UseSelectable = true;
+			this.btnNewWarehouse.Click += new System.EventHandler(this.btnNewWarehouse_Click);
+			// 
+			// btnDeleteWarehouse
+			// 
+			this.btnDeleteWarehouse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnDeleteWarehouse.Enabled = false;
+			this.btnDeleteWarehouse.Location = new System.Drawing.Point(704, 466);
+			this.btnDeleteWarehouse.Name = "btnDeleteWarehouse";
+			this.btnDeleteWarehouse.Size = new System.Drawing.Size(116, 30);
+			this.btnDeleteWarehouse.TabIndex = 4;
+			this.btnDeleteWarehouse.Text = "Raktár törlése";
+			this.btnDeleteWarehouse.UseSelectable = true;
+			this.btnDeleteWarehouse.Click += new System.EventHandler(this.btnDeleteWarehouse_Click);
+			// 
+			// btnDeletePartner
+			// 
+			this.btnDeletePartner.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnDeletePartner.Enabled = false;
+			this.btnDeletePartner.Location = new System.Drawing.Point(704, 466);
+			this.btnDeletePartner.Name = "btnDeletePartner";
+			this.btnDeletePartner.Size = new System.Drawing.Size(116, 30);
+			this.btnDeletePartner.TabIndex = 8;
+			this.btnDeletePartner.Text = "Partner törlése";
+			this.btnDeletePartner.UseSelectable = true;
+			this.btnDeletePartner.Click += new System.EventHandler(this.btnDeletePartner_Click);
+			// 
+			// btnNewPartner
+			// 
+			this.btnNewPartner.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnNewPartner.Location = new System.Drawing.Point(826, 466);
+			this.btnNewPartner.Name = "btnNewPartner";
+			this.btnNewPartner.Size = new System.Drawing.Size(116, 30);
+			this.btnNewPartner.TabIndex = 7;
+			this.btnNewPartner.Text = "Új partner";
+			this.btnNewPartner.UseSelectable = true;
+			this.btnNewPartner.Click += new System.EventHandler(this.btnNewPartner_Click);
 			// 
 			// MainForm
 			// 
@@ -355,6 +523,9 @@
 			this.pageItems.ResumeLayout(false);
 			this.panelItems.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.gridItems)).EndInit();
+			this.pagePartners.ResumeLayout(false);
+			this.panelPartners.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.gridPartners)).EndInit();
 			this.ResumeLayout(false);
 
 		}
@@ -366,8 +537,6 @@
 		private System.Windows.Forms.TabPage pageItems;
 		private MetroFramework.Controls.MetroPanel panelWarehouseTab;
 		private MetroFramework.Controls.MetroGrid gridWarehouse;
-		private MetroFramework.Controls.MetroButton btnDeleteWarehouse;
-		private MetroFramework.Controls.MetroButton btnNewWarehouse;
 		private System.Windows.Forms.DataGridViewTextBoxColumn warehouseNAme;
 		private System.Windows.Forms.DataGridViewTextBoxColumn warehouseCity;
 		private System.Windows.Forms.DataGridViewTextBoxColumn warehousePostCode;
@@ -381,5 +550,19 @@
 		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
 		private MetroFramework.Controls.MetroButton btnDeleteItem;
 		private MetroFramework.Controls.MetroButton btnNewItem;
+		private System.Windows.Forms.TabPage pagePartners;
+		private MetroFramework.Controls.MetroPanel panelPartners;
+		private MetroFramework.Controls.MetroGrid gridPartners;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
+		private System.Windows.Forms.DataGridViewTextBoxColumn columnPostCode;
+		private System.Windows.Forms.DataGridViewTextBoxColumn columnStreet;
+		private System.Windows.Forms.DataGridViewTextBoxColumn columnStreetNum;
+		private MetroFramework.Controls.MetroButton btnDeleteWarehouse;
+		private MetroFramework.Controls.MetroButton btnNewWarehouse;
+		private MetroFramework.Controls.MetroButton btnDeletePartner;
+		private MetroFramework.Controls.MetroButton btnNewPartner;
 	}
 }

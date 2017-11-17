@@ -18,6 +18,7 @@ namespace Raktar.App.Forms
 		{
 			LoadWarehouseTab();
 			LoadItemsTab();
+			LoadPartnersTab();
 		}
 
 		#region Warehouse tab
@@ -216,6 +217,108 @@ namespace Raktar.App.Forms
 					else
 					{
 						Error("Hiba a(z) \"" + itemEdit.EditedItem.Name + "\" frissítése közben!", "Hiba");
+					}
+				}
+			}
+		}
+		#endregion
+
+		#region Partners tab
+		private void LoadPartnersTab()
+		{
+			List<Partner> partners = Global.Database.SelectAll<Partner>("partner");
+
+			foreach (Partner p in partners)
+			{
+				AddPartnerEntry(p);
+			}
+		}
+
+		private void AddPartnerEntry(Partner p)
+		{
+			DataGridViewRow row = new DataGridViewRow();
+			row.CreateCells(gridPartners);
+
+			UpdatePartnerRowCells(row, p);
+
+			gridPartners.Rows.Add(row);
+		}
+
+		private void UpdatePartnerRowCells(DataGridViewRow row, Partner p)
+		{
+			row.Cells[0].Value = p.Name;
+			row.Cells[1].Value = p.Telephone;
+			row.Cells[2].Value = p.Email;
+			row.Cells[3].Value = p.City;
+			row.Cells[4].Value = p.PostCode;
+			row.Cells[5].Value = p.Street;
+			row.Cells[6].Value = p.StreetNumber;
+
+			row.Tag = p;
+		}
+
+		private void gridPartners_SelectionChanged(object sender, System.EventArgs e)
+		{
+			btnDeletePartner.Enabled = (gridPartners.SelectedRows.Count > 0);
+		}
+
+		private void btnDeletePartner_Click(object sender, System.EventArgs e)
+		{
+			DataGridViewRow[] selected = new DataGridViewRow[gridPartners.SelectedRows.Count];
+			gridPartners.SelectedRows.CopyTo(selected, 0);
+
+			foreach (DataGridViewRow row in selected)
+			{
+				Partner partner = (Partner)row.Tag;
+
+				if (!Global.Database.DeleteFrom<Partner>("partner", partner))
+				{
+					Error("Hiba a sor törlése közben! \"" + partner.Name + "\"", "Hiba!");
+					return;
+				}
+
+				gridPartners.Rows.Remove(row);
+			}
+		}
+
+		private void btnNewPartner_Click(object sender, System.EventArgs e)
+		{
+			using (PartnerEditForm edit = new PartnerEditForm())
+			{
+				if (edit.ShowDialog(this) == DialogResult.OK)
+				{
+					Partner newPartner = edit.EditPartner;
+
+					if(Global.Database.InsertInto<Partner>("partner", newPartner))
+					{
+						AddPartnerEntry(newPartner);
+					}
+					else
+					{
+						Error("Hiba a(z) \"" + edit.EditPartner.Name + "\" hozzáadása közben!", "Hiba!");
+					}
+				}
+			}
+		}
+
+		private void gridPartners_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+		{
+			if (e.RowIndex < 0 || e.RowIndex >= gridPartners.Rows.Count)
+				return;
+
+			DataGridViewRow row = gridPartners.Rows[e.RowIndex];
+
+			using (PartnerEditForm partnerEdit = new PartnerEditForm((Partner)row.Tag))
+			{
+				if (partnerEdit.ShowDialog(this) == DialogResult.OK)
+				{
+					if (Global.Database.Update<Partner>("partner", partnerEdit.EditPartner))
+					{
+						UpdatePartnerRowCells(row, partnerEdit.EditPartner);
+					}
+					else
+					{
+						Error("Hiba a(z) \"" + partnerEdit.EditPartner.Name + "\" frissítése közben!", "Hiba");
 					}
 				}
 			}
