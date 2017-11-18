@@ -2,7 +2,7 @@
 
 namespace Raktar.Database
 {
-	class DatabaseColumnAttribute : Attribute
+	public class DatabaseColumnAttribute : Attribute
 	{
 		public int ColumnIndex
 		{

@@ -9,13 +9,13 @@ namespace Raktar.App.Forms
 {
 	public partial class ItemEditForm : MetroForm
 	{
-		private Item _edit;
+		private ItemWithCategory _edit;
 
-		public Item EditedItem
+		public ItemWithCategory EditedItem
 		{
 			get
 			{
-				Item item = new Item();
+				ItemWithCategory item = new ItemWithCategory();
 
 				if (_edit != null)
 					item.ID = _edit.ID;
@@ -25,7 +25,10 @@ namespace Raktar.App.Forms
 				Double.TryParse(tbPrice.Text, NumberStyles.Any, CultureInfo.InvariantCulture, out item.Price);
 
 				item.Description = tbDescription.Text;
-				item.CategoryID = ((Category)cbCategory.SelectedItem).CategoryID;
+
+				Category cat = ((Category)cbCategory.SelectedItem);
+				item.CategoryID = cat.CategoryID;
+				item.CategoryName = cat.Name;
 
 				return item;
 			}
@@ -38,7 +41,7 @@ namespace Raktar.App.Forms
 			AppDesign.Apply(this);
 		}
 
-		public ItemEditForm(Item edit)
+		public ItemEditForm(ItemWithCategory edit)
 			: this()
 		{
 			_edit = edit;

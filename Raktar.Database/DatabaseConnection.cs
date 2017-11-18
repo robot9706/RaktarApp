@@ -52,6 +52,28 @@ namespace Raktar.Database
 			return _parsers[objectType];
 		}
 
+		public List<T> Select<T>(string selectQuery)
+		{
+			ObjectParser parser = GetParser<T>();
+
+			List<T> result = new List<T>();
+
+			using (OdbcCommand command = new OdbcCommand(selectQuery, _database))
+			{
+				using (OdbcDataReader reader = command.ExecuteReader())
+				{
+					while (reader.Read())
+					{
+						T item = parser.ParseItem<T>(reader);
+
+						result.Add(item);
+					}
+				}
+			}
+
+			return result;
+		}
+
 		public List<T> SelectAll<T>(string from)
 		{
 			ObjectParser parser = GetParser<T>();

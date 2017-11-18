@@ -1,4 +1,4 @@
-﻿using MetroFramework;
+﻿using Raktar.App.Data;
 using Raktar.Database;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -124,15 +124,15 @@ namespace Raktar.App.Forms
 		#region Items tab
 		private void LoadItemsTab()
 		{
-			List<Item> items = Global.Database.SelectAll<Item>("items");
+			List<ItemWithCategory> items = ComplexQueries.GetItemsWithCategories();
 
-			foreach (Item w in items)
+			foreach (ItemWithCategory w in items)
 			{
 				AddItemEntry(w);
 			}
 		}
 
-		private void AddItemEntry(Item i)
+		private void AddItemEntry(ItemWithCategory i)
 		{
 			DataGridViewRow row = new DataGridViewRow();
 			row.CreateCells(gridItems);
@@ -142,14 +142,11 @@ namespace Raktar.App.Forms
 			gridItems.Rows.Add(row);
 		}
 
-		private void UpdateItemRowCells(DataGridViewRow row, Item i)
+		private void UpdateItemRowCells(DataGridViewRow row, ItemWithCategory i)
 		{
-			Category category = Global.Database.SelectOne<Category>("category", new Dictionary<string, object>() { { "CategoryID", i.CategoryID } });
-			string categoryName = (category != null ? category.Name : "?");
-
 			row.Cells[0].Value = i.Name;
-			row.Cells[1].Value = i.Price.ToString();
-			row.Cells[2].Value = categoryName;
+			row.Cells[1].Value = i.Price;
+			row.Cells[2].Value = i.CategoryName;
 			row.Cells[3].Value = i.Description;
 
 			row.Tag = i;
@@ -167,7 +164,7 @@ namespace Raktar.App.Forms
 
 			foreach (DataGridViewRow row in selected)
 			{
-				Item item = (Item)row.Tag;
+				ItemWithCategory item = (ItemWithCategory)row.Tag;
 
 				if (!Global.Database.DeleteFrom<Item>("items", item))
 				{
@@ -185,7 +182,7 @@ namespace Raktar.App.Forms
 			{
 				if (edit.ShowDialog(this) == DialogResult.OK)
 				{
-					Item newItem = edit.EditedItem;
+					ItemWithCategory newItem = edit.EditedItem;
 
 					if (Global.Database.InsertInto<Item>("items", newItem))
 					{
@@ -206,7 +203,7 @@ namespace Raktar.App.Forms
 
 			DataGridViewRow row = gridItems.Rows[e.RowIndex];
 
-			using (ItemEditForm itemEdit = new ItemEditForm((Item)row.Tag))
+			using (ItemEditForm itemEdit = new ItemEditForm((ItemWithCategory)row.Tag))
 			{
 				if (itemEdit.ShowDialog(this) == DialogResult.OK)
 				{

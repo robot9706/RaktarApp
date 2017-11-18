@@ -44,6 +44,7 @@
     <Compile Include="DatabaseColumnAttribute.cs" />
     <Compile Include="DatabaseConnection.cs" />
     <Compile Include="Item.cs" />
+    <Compile Include="ItemWithCategory.cs" />
     <Compile Include="ObjectParser.cs" />
     <Compile Include="Partner.cs" />
     <Compile Include="PartnerShipment.cs" />

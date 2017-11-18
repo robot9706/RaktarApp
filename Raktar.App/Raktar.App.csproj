@@ -60,6 +60,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\AppConfig.cs" />
+    <Compile Include="Data\ComplexQueries.cs" />
     <Compile Include="Forms\AppDesign.cs" />
     <Compile Include="Forms\AppForm.cs">
       <SubType>Form</SubType>
