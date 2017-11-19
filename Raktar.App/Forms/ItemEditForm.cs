@@ -1,13 +1,12 @@
 ﻿using MetroFramework.Controls;
-using MetroFramework.Forms;
 using Raktar.Database;
 using System;
-using System.Linq;
 using System.Globalization;
+using Raktar.App.Data;
 
 namespace Raktar.App.Forms
 {
-	public partial class ItemEditForm : MetroForm
+	public partial class ItemEditForm : AppForm
 	{
 		private ItemWithCategory _edit;
 

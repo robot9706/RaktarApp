@@ -78,7 +78,9 @@ namespace Raktar.Database
 			{
 				object value = reader.GetFieldValue<object>(prop.Key);
 
-				prop.Value.Field.SetValue(newItem, value);
+				object typeChangedValue = Convert.ChangeType(value, prop.Value.Field.FieldType);
+
+				prop.Value.Field.SetValue(newItem, typeChangedValue);
 			}
 
 			return newItem;

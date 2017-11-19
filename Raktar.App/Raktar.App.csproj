@@ -59,8 +59,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\FixedDataGridView.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Data\AppConfig.cs" />
     <Compile Include="Data\ComplexQueries.cs" />
+    <Compile Include="Data\ItemWithCategory.cs" />
+    <Compile Include="Data\StockSummary.cs" />
+    <Compile Include="Data\WarehouseStock.cs" />
     <Compile Include="Forms\AppDesign.cs" />
     <Compile Include="Forms\AppForm.cs">
       <SubType>Form</SubType>
@@ -95,6 +101,12 @@
     <Compile Include="Forms\SplashForm.Designer.cs">
       <DependentUpon>SplashForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\StockManagerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\StockManagerForm.Designer.cs">
+      <DependentUpon>StockManagerForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\TextEnterForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -124,6 +136,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SplashForm.resx">
       <DependentUpon>SplashForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\StockManagerForm.resx">
+      <DependentUpon>StockManagerForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\TextEnterForm.resx">
       <DependentUpon>TextEnterForm.cs</DependentUpon>
@@ -164,6 +179,7 @@
     <Content Include="DLLs\MetroFramework.Design.dll" />
     <Content Include="DLLs\MetroFramework.dll" />
     <Content Include="DLLs\MetroFramework.Fonts.dll" />
+    <EmbeddedResource Include="Localization\hu\MetroMessageBoxControl.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

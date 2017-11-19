@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<root>
+  <Localization>
+    <Key>Ok</Key>
+    <Value>&amp;Ok</Value>
+  </Localization>
+  <Localization>
+    <Key>Cancel</Key>
+    <Value>&amp;Mégse</Value>
+  </Localization>
+  <Localization>
+    <Key>Retry</Key>
+    <Value>&amp;Újra</Value>
+  </Localization>
+  <Localization>
+    <Key>Yes</Key>
+    <Value>&amp;Igen</Value>
+  </Localization>
+  <Localization>
+    <Key>No</Key>
+    <Value>&amp;Nem</Value>
+  </Localization>
+  <Localization>
+    <Key>Abort</Key>
+    <Value>&amp;Leállít</Value>
+  </Localization>
+  <Localization>
+    <Key>Ignore</Key>
+    <Value>&amp;Kihagy</Value>
+  </Localization>
+</root>

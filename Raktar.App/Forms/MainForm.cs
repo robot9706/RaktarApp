@@ -16,14 +16,21 @@ namespace Raktar.App.Forms
 
 		private void MainForm_Load(object sender, System.EventArgs e)
 		{
-			LoadWarehouseTab();
-			LoadItemsTab();
-			LoadPartnersTab();
+			SuspendLayout();
+			{
+				LoadWarehouseTab();
+				LoadItemsTab();
+				LoadPartnersTab();
+				LoadStockTab();
+			}
+			ResumeLayout();
 		}
 
 		#region Warehouse tab
 		private void LoadWarehouseTab()
 		{
+			gridWarehouse.Rows.Clear();
+
 			List<Warehouse> ws = Global.Database.SelectAll<Warehouse>("warehouse");
 
 			foreach (Warehouse w in ws)
@@ -56,6 +63,7 @@ namespace Raktar.App.Forms
 		private void gridWarehouse_SelectionChanged(object sender, System.EventArgs e)
 		{
 			btnDeleteWarehouse.Enabled = (gridWarehouse.SelectedRows.Count > 0);
+			btnWarehouseEdit.Enabled = (gridWarehouse.SelectedRows.Count == 1);
 		}
 
 		private void btnDeleteWarehouse_Click(object sender, System.EventArgs e)
@@ -119,11 +127,18 @@ namespace Raktar.App.Forms
 				}
 			}
 		}
+
+		private void btnWarehouseEdit_Click(object sender, System.EventArgs e)
+		{
+			gridWarehouse_CellDoubleClick(gridWarehouse, new DataGridViewCellEventArgs(0, gridWarehouse.SelectedRows[0].Index));
+		}
 		#endregion
 
 		#region Items tab
 		private void LoadItemsTab()
 		{
+			gridItems.Rows.Clear();
+
 			List<ItemWithCategory> items = ComplexQueries.GetItemsWithCategories();
 
 			foreach (ItemWithCategory w in items)
@@ -155,6 +170,7 @@ namespace Raktar.App.Forms
 		private void gridItems_SelectionChanged(object sender, System.EventArgs e)
 		{
 			btnDeleteItem.Enabled = (gridItems.SelectedRows.Count > 0);
+			btnEditItem.Enabled = (gridItems.SelectedRows.Count == 1);
 		}
 
 		private void btnDeleteItem_Click(object sender, System.EventArgs e)
@@ -218,11 +234,18 @@ namespace Raktar.App.Forms
 				}
 			}
 		}
+
+		private void btnEditItem_Click(object sender, System.EventArgs e)
+		{
+			gridItems_CellDoubleClick(gridItems, new DataGridViewCellEventArgs(0, gridItems.SelectedRows[0].Index));
+		}
 		#endregion
 
 		#region Partners tab
 		private void LoadPartnersTab()
 		{
+			gridPartners.Rows.Clear();
+
 			List<Partner> partners = Global.Database.SelectAll<Partner>("partner");
 
 			foreach (Partner p in partners)
@@ -257,6 +280,7 @@ namespace Raktar.App.Forms
 		private void gridPartners_SelectionChanged(object sender, System.EventArgs e)
 		{
 			btnDeletePartner.Enabled = (gridPartners.SelectedRows.Count > 0);
+			btnEditPartner.Enabled = (gridPartners.SelectedRows.Count == 1);
 		}
 
 		private void btnDeletePartner_Click(object sender, System.EventArgs e)
@@ -286,7 +310,7 @@ namespace Raktar.App.Forms
 				{
 					Partner newPartner = edit.EditPartner;
 
-					if(Global.Database.InsertInto<Partner>("partner", newPartner))
+					if (Global.Database.InsertInto<Partner>("partner", newPartner))
 					{
 						AddPartnerEntry(newPartner);
 					}
@@ -319,6 +343,83 @@ namespace Raktar.App.Forms
 					}
 				}
 			}
+		}
+
+		private void btnEditPartner_Click(object sender, System.EventArgs e)
+		{
+			gridPartners_CellDoubleClick(gridPartners, new DataGridViewCellEventArgs(0, gridPartners.SelectedRows[0].Index));
+		}
+		#endregion
+
+		#region Stock tab
+		private void LoadStockTab()
+		{
+			int selectedEntryID = -1;
+			if (gridStock.SelectedRows.Count > 0)
+			{
+				selectedEntryID = ((StockSummary)gridStock.SelectedRows[0].Tag).ItemID;
+			}
+
+			gridStock.Rows.Clear();
+
+			List<StockSummary> summary = ComplexQueries.GetStockSummary();
+
+			foreach (StockSummary sum in summary)
+			{
+				DataGridViewRow newRow = AddStockEntry(sum);
+
+				if (selectedEntryID != -1 && sum.ItemID == selectedEntryID)
+				{
+					newRow.Selected = true;
+				}
+			}
+		}
+
+		private DataGridViewRow AddStockEntry(StockSummary w)
+		{
+			DataGridViewRow row = new DataGridViewRow();
+			row.CreateCells(gridStock);
+
+			UpdateStockRowCells(row, w);
+
+			gridStock.Rows.Add(row);
+
+			return row;
+		}
+
+		private void UpdateStockRowCells(DataGridViewRow row, StockSummary w)
+		{
+			row.Cells[0].Value = w.ItemName;
+			row.Cells[1].Value = w.Count;
+
+			row.Tag = w;
+		}
+
+		private void gridStock_SelectionChanged(object sender, System.EventArgs e)
+		{
+			btnStockEdit.Enabled = (gridStock.SelectedRows.Count == 1);
+		}
+
+		private void gridStock_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+		{
+			if (e.RowIndex < 0 || e.RowIndex >= gridStock.Rows.Count)
+				return;
+
+			DataGridViewRow row = gridStock.Rows[e.RowIndex];
+			StockSummary stock = (StockSummary)row.Tag;
+
+			using (StockManagerForm stockDialog = new StockManagerForm(stock.ItemID))
+			{
+				if (stockDialog.ShowDialog(this) == DialogResult.OK && stockDialog.DataChanged)
+				{
+					LoadStockTab();
+				}
+			}
+		}
+
+		private void btnStockEdit_Click(object sender, System.EventArgs e)
+		{
+			gridStock_CellDoubleClick(gridStock, new DataGridViewCellEventArgs(0, gridStock.SelectedRows[0].Index));
 		}
 		#endregion
 	}

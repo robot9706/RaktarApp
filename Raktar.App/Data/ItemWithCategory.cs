@@ -1,6 +1,6 @@
 ﻿using Raktar.Database;
 
-namespace Raktar.Database
+namespace Raktar.App.Data
 {
 	public class ItemWithCategory : Item
 	{

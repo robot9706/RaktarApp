@@ -13,7 +13,7 @@ namespace Raktar.App.Forms
 
 		public void Error(string info, string title)
 		{
-			MetroMessageBox.Show(this, info, title, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+			MetroMessageBox.Show(this, info, title, MessageBoxButtons.OK, MessageBoxIcon.Error);
 		}
 	}
 }

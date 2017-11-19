@@ -1,12 +1,10 @@
 ﻿using MetroFramework.Controls;
-using MetroFramework.Forms;
 using Raktar.Database;
 using System;
-using System.Windows.Forms;
 
 namespace Raktar.App.Forms
 {
-	public partial class WarehouseEditForm : MetroForm
+	public partial class WarehouseEditForm : AppForm
 	{
 		private Warehouse _edit;
 

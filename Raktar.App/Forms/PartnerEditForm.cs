@@ -1,11 +1,10 @@
 ﻿using MetroFramework.Controls;
-using MetroFramework.Forms;
 using Raktar.Database;
 using System;
 
 namespace Raktar.App.Forms
 {
-	public partial class PartnerEditForm : MetroForm
+	public partial class PartnerEditForm : AppForm
 	{
 		private Partner _partner;
 
