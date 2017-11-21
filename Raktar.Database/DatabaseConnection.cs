@@ -182,6 +182,14 @@ namespace Raktar.Database
 			}
 		}
 
+		public bool RunQuery(string query)
+		{
+			using (OdbcCommand command = new OdbcCommand(query, _database))
+			{
+				return (command.ExecuteNonQuery() != 0);
+			}
+		}
+
 		public int GetLastAutoIncrementID()
 		{
 			string query = "SELECT LAST_INSERT_ID()";

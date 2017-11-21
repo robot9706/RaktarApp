@@ -19,5 +19,10 @@
 
 		[DatabaseColumn(5, "StreetNumber")]
 		public int StreetNumber;
+
+		public override string ToString()
+		{
+			return Name;
+		}
 	}
 }

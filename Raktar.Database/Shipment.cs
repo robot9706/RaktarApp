@@ -7,7 +7,7 @@ namespace Raktar.Database
 		[DatabaseColumn(0, "WarehouseFrom", true, false)]
 		public int WarehouseFrom;
 
-		[DatabaseColumn(1, "WarehouseT", true, false)]
+		[DatabaseColumn(1, "WarehouseTo", true, false)]
 		public int WarehouseTo;
 
 		[DatabaseColumn(2, "ItemID", true, false)]

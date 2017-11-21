@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using System.Data.Odbc;
 using System.Reflection;
-using System.Linq;
 
 namespace Raktar.Database
 {
-	class ObjectParser
+	public class ObjectParser
 	{
 		public struct ColumnInfo
 		{
@@ -61,6 +60,9 @@ namespace Raktar.Database
 		{
 			if (asType.IsEquivalentTo(typeof(string)))
 				return "'" + (string)value + "'";
+
+			if (asType.IsEquivalentTo(typeof(DateTime)))
+				return "'" + (((DateTime)value).ToString("yyyy-MM-dd HH:mm:ss")) + "'";
 
 			return value.ToString();
 		}

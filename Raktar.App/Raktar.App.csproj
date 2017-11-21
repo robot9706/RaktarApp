@@ -52,6 +52,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controls\FixedDataGridView.cs">
@@ -61,6 +62,8 @@
     <Compile Include="Data\ComplexQueries.cs" />
     <Compile Include="Data\DataGridManager.cs" />
     <Compile Include="Data\ItemWithCategory.cs" />
+    <Compile Include="Data\PartnerShipmentSummary.cs" />
+    <Compile Include="Data\ShipmentSummary.cs" />
     <Compile Include="Data\StockSummary.cs" />
     <Compile Include="Data\WarehouseStock.cs" />
     <Compile Include="Forms\AppDesign.cs" />
@@ -84,6 +87,18 @@
     </Compile>
     <Compile Include="Forms\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\NewPartnerShipmentForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\NewPartnerShipmentForm.Designer.cs">
+      <DependentUpon>NewPartnerShipmentForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\NewShipmentForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\NewShipmentForm.Designer.cs">
+      <DependentUpon>NewShipmentForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\PartnerEditForm.cs">
       <SubType>Form</SubType>
@@ -126,6 +141,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\NewPartnerShipmentForm.resx">
+      <DependentUpon>NewPartnerShipmentForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\NewShipmentForm.resx">
+      <DependentUpon>NewShipmentForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\PartnerEditForm.resx">
       <DependentUpon>PartnerEditForm.cs</DependentUpon>
@@ -175,6 +196,7 @@
     <Content Include="DLLs\MetroFramework.Design.dll" />
     <Content Include="DLLs\MetroFramework.dll" />
     <Content Include="DLLs\MetroFramework.Fonts.dll" />
+    <EmbeddedResource Include="Localization\hu\MetroToggle.xml" />
     <EmbeddedResource Include="Localization\hu\MetroMessageBoxControl.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

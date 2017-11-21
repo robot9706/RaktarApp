@@ -12,5 +12,10 @@ namespace Raktar.App.Data
 
 		[DatabaseColumn(2, "ItemCount")]
 		public int ItemCount;
+
+		public override string ToString()
+		{
+			return WarehouseName + " (" + ItemCount.ToString() + ")";
+		}
 	}
 }

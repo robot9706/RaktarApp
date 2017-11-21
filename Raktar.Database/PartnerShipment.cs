@@ -20,6 +20,6 @@ namespace Raktar.Database
 		public int Count;
 
 		[DatabaseColumn(5, "Sell")]
-		public bool IsSelling;
+		public bool IsSell;
 	}
 }

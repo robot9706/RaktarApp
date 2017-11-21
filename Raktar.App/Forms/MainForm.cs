@@ -1,6 +1,8 @@
-﻿using Raktar.App.Data;
+﻿using MetroFramework;
+using Raktar.App.Data;
 using Raktar.Database;
 using System;
+using System.ComponentModel;
 using System.Windows.Forms;
 
 namespace Raktar.App.Forms
@@ -22,6 +24,8 @@ namespace Raktar.App.Forms
 				LoadItemsTab();
 				LoadPartnersTab();
 				LoadStockTab();
+				LoadShipmentTab();
+				LoadPartnerShipmentTab();
 			}
 			ResumeLayout();
 		}
@@ -313,6 +317,242 @@ namespace Raktar.App.Forms
 		private void btnStockEdit_Click(object sender, System.EventArgs e)
 		{
 			gridStock_CellDoubleClick(gridStock, new DataGridViewCellEventArgs(0, gridStock.SelectedRows[0].Index));
+		}
+		#endregion
+
+		#region Shipment tab
+		private void LoadShipmentTab()
+		{
+			int selectedEntryID = -1;
+			if (gridShipment.SelectedRows.Count > 0)
+			{
+				selectedEntryID = ((ShipmentSummary)gridShipment.SelectedRows[0].Tag).ItemID;
+			}
+
+			DataGridManager.AddDataGridEntries<ShipmentSummary>(gridShipment, ComplexQueries.GetShipmentSummary(), true, new Action<DataGridViewRow>(
+				(DataGridViewRow row) =>
+				{
+					ShipmentSummary sum = (ShipmentSummary)row.Tag;
+
+					if (selectedEntryID != -1 && sum.ItemID == selectedEntryID)
+					{
+						row.Selected = true;
+					}
+				}
+			));
+
+			gridShipment.Sort(gridShipment.Columns["colDate"], ListSortDirection.Ascending);
+		}
+
+		private void gridShipment_SelectionChanged(object sender, EventArgs e)
+		{
+			btnDeleteShipment.Enabled = btnShipmentRevert.Enabled = (gridShipment.SelectedRows.Count == 1);
+		}
+
+		private void btnDeleteShipment_Click(object sender, EventArgs e)
+		{
+			if (MetroMessageBox.Show(this, "Biztosan törölni akarja a szállítmányt?", "Biztos?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+				return;
+
+			DataGridViewRow row = gridShipment.SelectedRows[0];
+
+			ShipmentSummary shipment = (ShipmentSummary)row.Tag;
+
+			if(!Global.Database.DeleteFrom<Shipment>("shipment", shipment))
+			{
+				Error("Hiba a szállitmány törlése közben!", "Hiba");
+			}
+			else
+			{
+				gridShipment.Rows.Remove(row);
+
+				LoadShipmentTab();
+			}
+		}
+
+		private void btnShipmentRevert_Click(object sender, EventArgs e)
+		{
+			if (MetroMessageBox.Show(this, "Biztosan vissza akarja vonni a szállítmányt?", "Biztos?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+				return;
+
+			DataGridViewRow row = gridShipment.SelectedRows[0];
+
+			ShipmentSummary shipment = (ShipmentSummary)row.Tag;
+
+			switch (ComplexQueries.RevertShipment(shipment))
+			{
+				case ComplexQueries.ShipmentStatus.DatabaseError:
+					Error("Adatbázis hiba!", "Hiba");
+					break;
+				case ComplexQueries.ShipmentStatus.InvalidItemCount:
+					Error("A cél raktárban nincs elég a cikkből, hogy csökkenteni lehessen!", "Hiba");
+					break;
+				case ComplexQueries.ShipmentStatus.OK:
+					LoadStockTab();
+
+					LoadShipmentTab();
+
+					Info("Szállítmány visszavonva!", "Kész");
+					break;
+			}
+		}
+
+		private void btnNewShipment_Click(object sender, EventArgs e)
+		{
+			using (NewShipmentForm newShipment = new NewShipmentForm())
+			{
+				if (newShipment.ShowDialog(this) == DialogResult.OK)
+				{
+					Shipment shipment = newShipment.NewShipment;
+
+					if (!Global.Database.InsertInto<Shipment>("shipment", shipment))
+					{
+						Error("Hiba a szállítmány létrehozása közben!", "Hiba");
+						return;
+					}
+
+					ShipmentSummary newSummary = ComplexQueries.GetShipmentSummary(shipment);
+
+					if (newSummary == null)
+					{
+						Error("Hiba a szállítmány létrehozása közben!", "Hiba");
+						return;
+					}
+
+					switch (ComplexQueries.DoShipment(newSummary))
+					{
+						case ComplexQueries.ShipmentStatus.DatabaseError:
+							Error("Adatbázis hiba!", "Hiba");
+							break;
+						case ComplexQueries.ShipmentStatus.InvalidItemCount:
+							Error("Nincs elég a szállított tárgyból a raktárban!", "Hiba");
+							break;
+						case ComplexQueries.ShipmentStatus.OK:
+							DataGridManager.AddDataGridEntry<ShipmentSummary>(gridShipment, newSummary);
+
+							LoadStockTab();
+							break;
+					}
+				}
+			}
+		}
+		#endregion
+
+		#region PartnerShipment tab
+		private void LoadPartnerShipmentTab()
+		{
+			int selectedEntryID = -1;
+			if (gridPartnerShipment.SelectedRows.Count > 0)
+			{
+				selectedEntryID = ((PartnerShipmentSummary)gridPartnerShipment.SelectedRows[0].Tag).ItemID;
+			}
+
+			DataGridManager.AddDataGridEntries<PartnerShipmentSummary>(gridPartnerShipment, ComplexQueries.GetPartnerShipmentSummary(), true, new Action<DataGridViewRow>(
+				(DataGridViewRow row) =>
+				{
+					PartnerShipmentSummary sum = (PartnerShipmentSummary)row.Tag;
+
+					if (selectedEntryID != -1 && sum.ItemID == selectedEntryID)
+					{
+						row.Selected = true;
+					}
+				}
+			));
+
+			gridPartnerShipment.Sort(gridPartnerShipment.Columns["colPartnerDate"], ListSortDirection.Ascending);
+		}
+
+		private void gridPartnerShipment_SelectionChanged(object sender, EventArgs e)
+		{
+			btnDeletePShipment.Enabled = btnRevertPShipment.Enabled = (gridPartnerShipment.SelectedRows.Count == 1);
+		}
+
+		private void btnDeletePShipment_Click(object sender, EventArgs e)
+		{
+			if (MetroMessageBox.Show(this, "Biztosan törölni akarja a szállítmányt?", "Biztos?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+				return;
+
+			DataGridViewRow row = gridPartnerShipment.SelectedRows[0];
+
+			PartnerShipmentSummary pshipment = (PartnerShipmentSummary)row.Tag;
+
+			if (!Global.Database.DeleteFrom<PartnerShipmentSummary>("partnershipment", pshipment))
+			{
+				Error("Hiba a szállitmány törlése közben!", "Hiba");
+			}
+			else
+			{
+				gridPartnerShipment.Rows.Remove(row);
+
+				LoadPartnerShipmentTab();
+			}
+		}
+
+		private void btnRevertPShipment_Click(object sender, EventArgs e)
+		{
+			if (MetroMessageBox.Show(this, "Biztosan vissza akarja vonni a szállítmányt?", "Biztos?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+				return;
+
+			DataGridViewRow row = gridPartnerShipment.SelectedRows[0];
+
+			PartnerShipmentSummary shipment = (PartnerShipmentSummary)row.Tag;
+
+			switch (ComplexQueries.RevertPartnerShipment(shipment))
+			{
+				case ComplexQueries.ShipmentStatus.DatabaseError:
+					Error("Adatbázis hiba!", "Hiba");
+					break;
+				case ComplexQueries.ShipmentStatus.InvalidItemCount:
+					Error("A cél raktárban nincs elég a cikkből, hogy csökkenteni lehessen!", "Hiba");
+					break;
+				case ComplexQueries.ShipmentStatus.OK:
+					LoadStockTab();
+
+					LoadPartnerShipmentTab();
+
+					Info("Szállítmány visszavonva!", "Kész");
+					break;
+			}
+		}
+
+		private void btnNewPShipment_Click(object sender, EventArgs e)
+		{
+			using (NewPartnerShipmentForm newPartnerShipment = new NewPartnerShipmentForm())
+			{
+				if (newPartnerShipment.ShowDialog(this) == DialogResult.OK)
+				{
+					PartnerShipment pshipment = newPartnerShipment.NewShipment;
+
+					if (!Global.Database.InsertInto<PartnerShipment>("partnershipment", pshipment))
+					{
+						Error("Hiba a szállítmány létrehozása közben!", "Hiba");
+						return;
+					}
+
+					PartnerShipmentSummary newSummary = ComplexQueries.GetPartnerShipmentSummary(pshipment);
+
+					if (newSummary == null)
+					{
+						Error("Hiba a szállítmány létrehozása közben!", "Hiba");
+						return;
+					}
+
+					switch (ComplexQueries.DoPartnerShipment(newSummary))
+					{
+						case ComplexQueries.ShipmentStatus.DatabaseError:
+							Error("Adatbázis hiba!", "Hiba");
+							break;
+						case ComplexQueries.ShipmentStatus.InvalidItemCount:
+							Error("Nincs elég a szállított tárgyból a raktárban!", "Hiba");
+							break;
+						case ComplexQueries.ShipmentStatus.OK:
+							DataGridManager.AddDataGridEntry<PartnerShipmentSummary>(gridPartnerShipment, newSummary);
+
+							LoadStockTab();
+							break;
+					}
+				}
+			}
 		}
 		#endregion
 	}

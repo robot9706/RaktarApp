@@ -25,5 +25,10 @@
 
 		[DatabaseColumn(7, "Email")]
 		public string Email;
+
+		public override string ToString()
+		{
+			return Name;
+		}
 	}
 }

@@ -16,5 +16,10 @@
 
 		[DatabaseColumn(4, "CategoryID")]
 		public int CategoryID;
+
+		public override string ToString()
+		{
+			return Name;
+		}
 	}
 }

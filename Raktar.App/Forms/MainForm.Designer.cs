@@ -40,6 +40,14 @@
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.tabs = new MetroFramework.Controls.MetroTabControl();
 			this.pageWarehouse = new System.Windows.Forms.TabPage();
 			this.panelWarehouseTab = new MetroFramework.Controls.MetroPanel();
@@ -81,6 +89,29 @@
 			this.gridStock = new Raktar.App.Controls.FixedDataGridView();
 			this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.pageShipment = new System.Windows.Forms.TabPage();
+			this.panelShipment = new System.Windows.Forms.Panel();
+			this.btnDeleteShipment = new MetroFramework.Controls.MetroButton();
+			this.btnShipmentRevert = new MetroFramework.Controls.MetroButton();
+			this.btnNewShipment = new MetroFramework.Controls.MetroButton();
+			this.gridShipment = new Raktar.App.Controls.FixedDataGridView();
+			this.pagePartnerShipment = new System.Windows.Forms.TabPage();
+			this.panelPartnerShipment = new System.Windows.Forms.Panel();
+			this.btnDeletePShipment = new MetroFramework.Controls.MetroButton();
+			this.btnRevertPShipment = new MetroFramework.Controls.MetroButton();
+			this.btnNewPShipment = new MetroFramework.Controls.MetroButton();
+			this.gridPartnerShipment = new Raktar.App.Controls.FixedDataGridView();
+			this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.colPartnerDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.colSell = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.colTo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.colItem = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.colDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.colCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.tabs.SuspendLayout();
 			this.pageWarehouse.SuspendLayout();
 			this.panelWarehouseTab.SuspendLayout();
@@ -94,6 +125,12 @@
 			this.pageStock.SuspendLayout();
 			this.panelStock.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.gridStock)).BeginInit();
+			this.pageShipment.SuspendLayout();
+			this.panelShipment.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.gridShipment)).BeginInit();
+			this.pagePartnerShipment.SuspendLayout();
+			this.panelPartnerShipment.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.gridPartnerShipment)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// tabs
@@ -105,9 +142,11 @@
 			this.tabs.Controls.Add(this.pageItems);
 			this.tabs.Controls.Add(this.pagePartners);
 			this.tabs.Controls.Add(this.pageStock);
+			this.tabs.Controls.Add(this.pageShipment);
+			this.tabs.Controls.Add(this.pagePartnerShipment);
 			this.tabs.Location = new System.Drawing.Point(25, 63);
 			this.tabs.Name = "tabs";
-			this.tabs.SelectedIndex = 3;
+			this.tabs.SelectedIndex = 4;
 			this.tabs.Size = new System.Drawing.Size(953, 541);
 			this.tabs.TabIndex = 0;
 			this.tabs.UseSelectable = true;
@@ -228,7 +267,7 @@
 			this.gridWarehouse.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
 			this.gridWarehouse.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
 			this.gridWarehouse.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-			this.gridWarehouse.Size = new System.Drawing.Size(937, 452);
+			this.gridWarehouse.Size = new System.Drawing.Size(938, 452);
 			this.gridWarehouse.TabIndex = 2;
 			this.gridWarehouse.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridWarehouse_CellDoubleClick);
 			this.gridWarehouse.SelectionChanged += new System.EventHandler(this.gridWarehouse_SelectionChanged);
@@ -375,7 +414,7 @@
 			this.gridItems.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
 			this.gridItems.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
 			this.gridItems.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-			this.gridItems.Size = new System.Drawing.Size(939, 454);
+			this.gridItems.Size = new System.Drawing.Size(938, 454);
 			this.gridItems.TabIndex = 3;
 			this.gridItems.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridItems_CellDoubleClick);
 			this.gridItems.SelectionChanged += new System.EventHandler(this.gridItems_SelectionChanged);
@@ -524,7 +563,7 @@
 			this.gridPartners.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
 			this.gridPartners.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
 			this.gridPartners.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-			this.gridPartners.Size = new System.Drawing.Size(939, 454);
+			this.gridPartners.Size = new System.Drawing.Size(938, 454);
 			this.gridPartners.TabIndex = 4;
 			this.gridPartners.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridPartners_CellDoubleClick);
 			this.gridPartners.SelectionChanged += new System.EventHandler(this.gridPartners_SelectionChanged);
@@ -655,7 +694,7 @@
 			this.gridStock.RowHeadersDefaultCellStyle = dataGridViewCellStyle12;
 			this.gridStock.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
 			this.gridStock.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-			this.gridStock.Size = new System.Drawing.Size(939, 454);
+			this.gridStock.Size = new System.Drawing.Size(938, 454);
 			this.gridStock.TabIndex = 5;
 			this.gridStock.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridStock_CellDoubleClick);
 			this.gridStock.SelectionChanged += new System.EventHandler(this.gridStock_SelectionChanged);
@@ -671,6 +710,308 @@
 			this.dataGridViewTextBoxColumn10.HeaderText = "Mennyiség";
 			this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
 			this.dataGridViewTextBoxColumn10.ReadOnly = true;
+			// 
+			// pageShipment
+			// 
+			this.pageShipment.Controls.Add(this.panelShipment);
+			this.pageShipment.Location = new System.Drawing.Point(4, 38);
+			this.pageShipment.Name = "pageShipment";
+			this.pageShipment.Size = new System.Drawing.Size(945, 499);
+			this.pageShipment.TabIndex = 4;
+			this.pageShipment.Text = "Raktárközi szállítmányok";
+			// 
+			// panelShipment
+			// 
+			this.panelShipment.BackColor = System.Drawing.Color.White;
+			this.panelShipment.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.panelShipment.Controls.Add(this.btnDeleteShipment);
+			this.panelShipment.Controls.Add(this.btnShipmentRevert);
+			this.panelShipment.Controls.Add(this.btnNewShipment);
+			this.panelShipment.Controls.Add(this.gridShipment);
+			this.panelShipment.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.panelShipment.Location = new System.Drawing.Point(0, 0);
+			this.panelShipment.Name = "panelShipment";
+			this.panelShipment.Size = new System.Drawing.Size(945, 499);
+			this.panelShipment.TabIndex = 1;
+			// 
+			// btnDeleteShipment
+			// 
+			this.btnDeleteShipment.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnDeleteShipment.Enabled = false;
+			this.btnDeleteShipment.Location = new System.Drawing.Point(580, 464);
+			this.btnDeleteShipment.Name = "btnDeleteShipment";
+			this.btnDeleteShipment.Size = new System.Drawing.Size(116, 30);
+			this.btnDeleteShipment.TabIndex = 11;
+			this.btnDeleteShipment.Text = "Törlés";
+			this.btnDeleteShipment.UseSelectable = true;
+			this.btnDeleteShipment.Click += new System.EventHandler(this.btnDeleteShipment_Click);
+			// 
+			// btnShipmentRevert
+			// 
+			this.btnShipmentRevert.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnShipmentRevert.Enabled = false;
+			this.btnShipmentRevert.Location = new System.Drawing.Point(702, 464);
+			this.btnShipmentRevert.Name = "btnShipmentRevert";
+			this.btnShipmentRevert.Size = new System.Drawing.Size(116, 30);
+			this.btnShipmentRevert.TabIndex = 10;
+			this.btnShipmentRevert.Text = "Visszavonás";
+			this.btnShipmentRevert.UseSelectable = true;
+			this.btnShipmentRevert.Click += new System.EventHandler(this.btnShipmentRevert_Click);
+			// 
+			// btnNewShipment
+			// 
+			this.btnNewShipment.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnNewShipment.Location = new System.Drawing.Point(824, 464);
+			this.btnNewShipment.Name = "btnNewShipment";
+			this.btnNewShipment.Size = new System.Drawing.Size(116, 30);
+			this.btnNewShipment.TabIndex = 9;
+			this.btnNewShipment.Text = "Új szállítmány";
+			this.btnNewShipment.UseSelectable = true;
+			this.btnNewShipment.Click += new System.EventHandler(this.btnNewShipment_Click);
+			// 
+			// gridShipment
+			// 
+			this.gridShipment.AllowUserToAddRows = false;
+			this.gridShipment.AllowUserToDeleteRows = false;
+			this.gridShipment.AllowUserToResizeRows = false;
+			this.gridShipment.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.gridShipment.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+			this.gridShipment.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+			this.gridShipment.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			this.gridShipment.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+			this.gridShipment.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+			dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+			dataGridViewCellStyle13.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			dataGridViewCellStyle13.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+			dataGridViewCellStyle13.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+			dataGridViewCellStyle13.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+			dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.gridShipment.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle13;
+			this.gridShipment.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.gridShipment.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn11,
+            this.colTo,
+            this.colItem,
+            this.colDate,
+            this.colCount});
+			dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle15.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+			dataGridViewCellStyle15.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			dataGridViewCellStyle15.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
+			dataGridViewCellStyle15.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+			dataGridViewCellStyle15.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+			dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+			this.gridShipment.DefaultCellStyle = dataGridViewCellStyle15;
+			this.gridShipment.EnableHeadersVisualStyles = false;
+			this.gridShipment.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.gridShipment.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+			this.gridShipment.Location = new System.Drawing.Point(3, 3);
+			this.gridShipment.MultiSelect = false;
+			this.gridShipment.Name = "gridShipment";
+			this.gridShipment.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+			dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle16.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+			dataGridViewCellStyle16.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			dataGridViewCellStyle16.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+			dataGridViewCellStyle16.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+			dataGridViewCellStyle16.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+			dataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.gridShipment.RowHeadersDefaultCellStyle = dataGridViewCellStyle16;
+			this.gridShipment.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+			this.gridShipment.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+			this.gridShipment.Size = new System.Drawing.Size(938, 454);
+			this.gridShipment.TabIndex = 6;
+			this.gridShipment.SelectionChanged += new System.EventHandler(this.gridShipment_SelectionChanged);
+			// 
+			// pagePartnerShipment
+			// 
+			this.pagePartnerShipment.Controls.Add(this.panelPartnerShipment);
+			this.pagePartnerShipment.Location = new System.Drawing.Point(4, 38);
+			this.pagePartnerShipment.Name = "pagePartnerShipment";
+			this.pagePartnerShipment.Size = new System.Drawing.Size(945, 499);
+			this.pagePartnerShipment.TabIndex = 5;
+			this.pagePartnerShipment.Text = "Partner szállítmányok";
+			// 
+			// panelPartnerShipment
+			// 
+			this.panelPartnerShipment.BackColor = System.Drawing.Color.White;
+			this.panelPartnerShipment.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.panelPartnerShipment.Controls.Add(this.btnDeletePShipment);
+			this.panelPartnerShipment.Controls.Add(this.btnRevertPShipment);
+			this.panelPartnerShipment.Controls.Add(this.btnNewPShipment);
+			this.panelPartnerShipment.Controls.Add(this.gridPartnerShipment);
+			this.panelPartnerShipment.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.panelPartnerShipment.Location = new System.Drawing.Point(0, 0);
+			this.panelPartnerShipment.Name = "panelPartnerShipment";
+			this.panelPartnerShipment.Size = new System.Drawing.Size(945, 499);
+			this.panelPartnerShipment.TabIndex = 1;
+			// 
+			// btnDeletePShipment
+			// 
+			this.btnDeletePShipment.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnDeletePShipment.Enabled = false;
+			this.btnDeletePShipment.Location = new System.Drawing.Point(580, 464);
+			this.btnDeletePShipment.Name = "btnDeletePShipment";
+			this.btnDeletePShipment.Size = new System.Drawing.Size(116, 30);
+			this.btnDeletePShipment.TabIndex = 14;
+			this.btnDeletePShipment.Text = "Törlés";
+			this.btnDeletePShipment.UseSelectable = true;
+			this.btnDeletePShipment.Click += new System.EventHandler(this.btnDeletePShipment_Click);
+			// 
+			// btnRevertPShipment
+			// 
+			this.btnRevertPShipment.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnRevertPShipment.Enabled = false;
+			this.btnRevertPShipment.Location = new System.Drawing.Point(702, 464);
+			this.btnRevertPShipment.Name = "btnRevertPShipment";
+			this.btnRevertPShipment.Size = new System.Drawing.Size(116, 30);
+			this.btnRevertPShipment.TabIndex = 13;
+			this.btnRevertPShipment.Text = "Visszavonás";
+			this.btnRevertPShipment.UseSelectable = true;
+			this.btnRevertPShipment.Click += new System.EventHandler(this.btnRevertPShipment_Click);
+			// 
+			// btnNewPShipment
+			// 
+			this.btnNewPShipment.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnNewPShipment.Location = new System.Drawing.Point(824, 464);
+			this.btnNewPShipment.Name = "btnNewPShipment";
+			this.btnNewPShipment.Size = new System.Drawing.Size(116, 30);
+			this.btnNewPShipment.TabIndex = 12;
+			this.btnNewPShipment.Text = "Új szállítmány";
+			this.btnNewPShipment.UseSelectable = true;
+			this.btnNewPShipment.Click += new System.EventHandler(this.btnNewPShipment_Click);
+			// 
+			// gridPartnerShipment
+			// 
+			this.gridPartnerShipment.AllowUserToAddRows = false;
+			this.gridPartnerShipment.AllowUserToDeleteRows = false;
+			this.gridPartnerShipment.AllowUserToResizeRows = false;
+			this.gridPartnerShipment.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.gridPartnerShipment.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+			this.gridPartnerShipment.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+			this.gridPartnerShipment.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			this.gridPartnerShipment.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+			this.gridPartnerShipment.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+			dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle17.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+			dataGridViewCellStyle17.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			dataGridViewCellStyle17.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+			dataGridViewCellStyle17.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+			dataGridViewCellStyle17.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+			dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.gridPartnerShipment.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle17;
+			this.gridPartnerShipment.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.gridPartnerShipment.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn12,
+            this.dataGridViewTextBoxColumn13,
+            this.dataGridViewTextBoxColumn14,
+            this.colPartnerDate,
+            this.dataGridViewTextBoxColumn16,
+            this.colSell});
+			dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle19.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+			dataGridViewCellStyle19.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			dataGridViewCellStyle19.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
+			dataGridViewCellStyle19.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+			dataGridViewCellStyle19.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+			dataGridViewCellStyle19.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+			this.gridPartnerShipment.DefaultCellStyle = dataGridViewCellStyle19;
+			this.gridPartnerShipment.EnableHeadersVisualStyles = false;
+			this.gridPartnerShipment.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.gridPartnerShipment.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+			this.gridPartnerShipment.Location = new System.Drawing.Point(3, 3);
+			this.gridPartnerShipment.MultiSelect = false;
+			this.gridPartnerShipment.Name = "gridPartnerShipment";
+			this.gridPartnerShipment.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+			dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle20.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+			dataGridViewCellStyle20.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			dataGridViewCellStyle20.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+			dataGridViewCellStyle20.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+			dataGridViewCellStyle20.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+			dataGridViewCellStyle20.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.gridPartnerShipment.RowHeadersDefaultCellStyle = dataGridViewCellStyle20;
+			this.gridPartnerShipment.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+			this.gridPartnerShipment.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+			this.gridPartnerShipment.Size = new System.Drawing.Size(938, 454);
+			this.gridPartnerShipment.TabIndex = 7;
+			this.gridPartnerShipment.SelectionChanged += new System.EventHandler(this.gridPartnerShipment_SelectionChanged);
+			// 
+			// dataGridViewTextBoxColumn12
+			// 
+			this.dataGridViewTextBoxColumn12.HeaderText = "Partner";
+			this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
+			this.dataGridViewTextBoxColumn12.ReadOnly = true;
+			// 
+			// dataGridViewTextBoxColumn13
+			// 
+			this.dataGridViewTextBoxColumn13.HeaderText = "Raktár";
+			this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
+			this.dataGridViewTextBoxColumn13.ReadOnly = true;
+			// 
+			// dataGridViewTextBoxColumn14
+			// 
+			this.dataGridViewTextBoxColumn14.HeaderText = "Cikk";
+			this.dataGridViewTextBoxColumn14.Name = "dataGridViewTextBoxColumn14";
+			this.dataGridViewTextBoxColumn14.ReadOnly = true;
+			// 
+			// colPartnerDate
+			// 
+			dataGridViewCellStyle18.Format = "yyyy. MM. dd.";
+			dataGridViewCellStyle18.NullValue = null;
+			this.colPartnerDate.DefaultCellStyle = dataGridViewCellStyle18;
+			this.colPartnerDate.HeaderText = "Mikor";
+			this.colPartnerDate.Name = "colPartnerDate";
+			this.colPartnerDate.ReadOnly = true;
+			// 
+			// dataGridViewTextBoxColumn16
+			// 
+			this.dataGridViewTextBoxColumn16.HeaderText = "Mennyiség";
+			this.dataGridViewTextBoxColumn16.Name = "dataGridViewTextBoxColumn16";
+			this.dataGridViewTextBoxColumn16.ReadOnly = true;
+			// 
+			// colSell
+			// 
+			this.colSell.HeaderText = "Eladás?";
+			this.colSell.Name = "colSell";
+			this.colSell.ReadOnly = true;
+			// 
+			// dataGridViewTextBoxColumn11
+			// 
+			this.dataGridViewTextBoxColumn11.HeaderText = "Honnan";
+			this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
+			this.dataGridViewTextBoxColumn11.ReadOnly = true;
+			// 
+			// colTo
+			// 
+			this.colTo.HeaderText = "Hova";
+			this.colTo.Name = "colTo";
+			this.colTo.ReadOnly = true;
+			// 
+			// colItem
+			// 
+			this.colItem.HeaderText = "Cikk";
+			this.colItem.Name = "colItem";
+			this.colItem.ReadOnly = true;
+			// 
+			// colDate
+			// 
+			dataGridViewCellStyle14.Format = "yyyy. MM. dd.";
+			this.colDate.DefaultCellStyle = dataGridViewCellStyle14;
+			this.colDate.HeaderText = "Mikor";
+			this.colDate.Name = "colDate";
+			this.colDate.ReadOnly = true;
+			// 
+			// colCount
+			// 
+			this.colCount.HeaderText = "Mennyiség";
+			this.colCount.Name = "colCount";
+			this.colCount.ReadOnly = true;
 			// 
 			// MainForm
 			// 
@@ -695,6 +1036,12 @@
 			this.pageStock.ResumeLayout(false);
 			this.panelStock.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.gridStock)).EndInit();
+			this.pageShipment.ResumeLayout(false);
+			this.panelShipment.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.gridShipment)).EndInit();
+			this.pagePartnerShipment.ResumeLayout(false);
+			this.panelPartnerShipment.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.gridPartnerShipment)).EndInit();
 			this.ResumeLayout(false);
 
 		}
@@ -742,5 +1089,28 @@
 		private MetroFramework.Controls.MetroButton btnEditItem;
 		private MetroFramework.Controls.MetroButton btnEditPartner;
 		private MetroFramework.Controls.MetroButton btnStockEdit;
+		private System.Windows.Forms.TabPage pageShipment;
+		private System.Windows.Forms.Panel panelShipment;
+		private Controls.FixedDataGridView gridShipment;
+		private MetroFramework.Controls.MetroButton btnShipmentRevert;
+		private MetroFramework.Controls.MetroButton btnNewShipment;
+		private MetroFramework.Controls.MetroButton btnDeleteShipment;
+		private System.Windows.Forms.TabPage pagePartnerShipment;
+		private System.Windows.Forms.Panel panelPartnerShipment;
+		private Controls.FixedDataGridView gridPartnerShipment;
+		private MetroFramework.Controls.MetroButton btnDeletePShipment;
+		private MetroFramework.Controls.MetroButton btnRevertPShipment;
+		private MetroFramework.Controls.MetroButton btnNewPShipment;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn12;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn13;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn14;
+		private System.Windows.Forms.DataGridViewTextBoxColumn colPartnerDate;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn16;
+		private System.Windows.Forms.DataGridViewTextBoxColumn colSell;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
+		private System.Windows.Forms.DataGridViewTextBoxColumn colTo;
+		private System.Windows.Forms.DataGridViewTextBoxColumn colItem;
+		private System.Windows.Forms.DataGridViewTextBoxColumn colDate;
+		private System.Windows.Forms.DataGridViewTextBoxColumn colCount;
 	}
 }
