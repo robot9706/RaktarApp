@@ -48,15 +48,10 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controls\FixedDataGridView.cs">
@@ -64,6 +59,7 @@
     </Compile>
     <Compile Include="Data\AppConfig.cs" />
     <Compile Include="Data\ComplexQueries.cs" />
+    <Compile Include="Data\DataGridManager.cs" />
     <Compile Include="Data\ItemWithCategory.cs" />
     <Compile Include="Data\StockSummary.cs" />
     <Compile Include="Data\WarehouseStock.cs" />

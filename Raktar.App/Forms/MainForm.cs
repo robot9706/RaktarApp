@@ -1,6 +1,6 @@
 ﻿using Raktar.App.Data;
 using Raktar.Database;
-using System.Collections.Generic;
+using System;
 using System.Windows.Forms;
 
 namespace Raktar.App.Forms
@@ -29,35 +29,7 @@ namespace Raktar.App.Forms
 		#region Warehouse tab
 		private void LoadWarehouseTab()
 		{
-			gridWarehouse.Rows.Clear();
-
-			List<Warehouse> ws = Global.Database.SelectAll<Warehouse>("warehouse");
-
-			foreach (Warehouse w in ws)
-			{
-				AddWarehouseEntry(w);
-			}
-		}
-
-		private void AddWarehouseEntry(Warehouse w)
-		{
-			DataGridViewRow row = new DataGridViewRow();
-			row.CreateCells(gridWarehouse);
-
-			UpdateWarehouseRowCells(row, w);
-
-			gridWarehouse.Rows.Add(row);
-		}
-
-		private void UpdateWarehouseRowCells(DataGridViewRow row, Warehouse w)
-		{
-			row.Cells[0].Value = w.Name;
-			row.Cells[1].Value = w.City;
-			row.Cells[2].Value = w.PostCode;
-			row.Cells[3].Value = w.Street;
-			row.Cells[4].Value = w.StreetNumber;
-
-			row.Tag = w;
+			DataGridManager.AddDataGridEntries<Warehouse>(gridWarehouse, Global.Database.SelectAll<Warehouse>("warehouse"));
 		}
 
 		private void gridWarehouse_SelectionChanged(object sender, System.EventArgs e)
@@ -95,7 +67,7 @@ namespace Raktar.App.Forms
 
 					if (Global.Database.InsertInto<Warehouse>("warehouse", newWarehouse))
 					{
-						AddWarehouseEntry(newWarehouse);
+						DataGridManager.AddDataGridEntry<Warehouse>(gridWarehouse, newWarehouse);
 					}
 					else
 					{
@@ -118,7 +90,7 @@ namespace Raktar.App.Forms
 				{
 					if (Global.Database.Update<Warehouse>("warehouse", whEdit.EditedWarehouse))
 					{
-						UpdateWarehouseRowCells(row, whEdit.EditedWarehouse);
+						DataGridManager.UpdateRow<Warehouse>(row, whEdit.EditedWarehouse);
 					}
 					else
 					{
@@ -137,34 +109,7 @@ namespace Raktar.App.Forms
 		#region Items tab
 		private void LoadItemsTab()
 		{
-			gridItems.Rows.Clear();
-
-			List<ItemWithCategory> items = ComplexQueries.GetItemsWithCategories();
-
-			foreach (ItemWithCategory w in items)
-			{
-				AddItemEntry(w);
-			}
-		}
-
-		private void AddItemEntry(ItemWithCategory i)
-		{
-			DataGridViewRow row = new DataGridViewRow();
-			row.CreateCells(gridItems);
-
-			UpdateItemRowCells(row, i);
-
-			gridItems.Rows.Add(row);
-		}
-
-		private void UpdateItemRowCells(DataGridViewRow row, ItemWithCategory i)
-		{
-			row.Cells[0].Value = i.Name;
-			row.Cells[1].Value = i.Price;
-			row.Cells[2].Value = i.CategoryName;
-			row.Cells[3].Value = i.Description;
-
-			row.Tag = i;
+			DataGridManager.AddDataGridEntries<ItemWithCategory>(gridItems, ComplexQueries.GetItemsWithCategories());
 		}
 
 		private void gridItems_SelectionChanged(object sender, System.EventArgs e)
@@ -202,7 +147,7 @@ namespace Raktar.App.Forms
 
 					if (Global.Database.InsertInto<Item>("items", newItem))
 					{
-						AddItemEntry(newItem);
+						DataGridManager.AddDataGridEntry<ItemWithCategory>(gridItems, newItem);
 					}
 					else
 					{
@@ -225,7 +170,7 @@ namespace Raktar.App.Forms
 				{
 					if (Global.Database.Update<Item>("items", itemEdit.EditedItem))
 					{
-						UpdateItemRowCells(row, itemEdit.EditedItem);
+						DataGridManager.UpdateRow<ItemWithCategory>(row, itemEdit.EditedItem);
 					}
 					else
 					{
@@ -244,37 +189,7 @@ namespace Raktar.App.Forms
 		#region Partners tab
 		private void LoadPartnersTab()
 		{
-			gridPartners.Rows.Clear();
-
-			List<Partner> partners = Global.Database.SelectAll<Partner>("partner");
-
-			foreach (Partner p in partners)
-			{
-				AddPartnerEntry(p);
-			}
-		}
-
-		private void AddPartnerEntry(Partner p)
-		{
-			DataGridViewRow row = new DataGridViewRow();
-			row.CreateCells(gridPartners);
-
-			UpdatePartnerRowCells(row, p);
-
-			gridPartners.Rows.Add(row);
-		}
-
-		private void UpdatePartnerRowCells(DataGridViewRow row, Partner p)
-		{
-			row.Cells[0].Value = p.Name;
-			row.Cells[1].Value = p.Telephone;
-			row.Cells[2].Value = p.Email;
-			row.Cells[3].Value = p.City;
-			row.Cells[4].Value = p.PostCode;
-			row.Cells[5].Value = p.Street;
-			row.Cells[6].Value = p.StreetNumber;
-
-			row.Tag = p;
+			DataGridManager.AddDataGridEntries<Partner>(gridPartners, Global.Database.SelectAll<Partner>("partner"));
 		}
 
 		private void gridPartners_SelectionChanged(object sender, System.EventArgs e)
@@ -312,7 +227,7 @@ namespace Raktar.App.Forms
 
 					if (Global.Database.InsertInto<Partner>("partner", newPartner))
 					{
-						AddPartnerEntry(newPartner);
+						DataGridManager.AddDataGridEntry<Partner>(gridPartners, newPartner);
 					}
 					else
 					{
@@ -335,7 +250,7 @@ namespace Raktar.App.Forms
 				{
 					if (Global.Database.Update<Partner>("partner", partnerEdit.EditPartner))
 					{
-						UpdatePartnerRowCells(row, partnerEdit.EditPartner);
+						DataGridManager.UpdateRow<Partner>(row, partnerEdit.EditPartner);
 					}
 					else
 					{
@@ -360,39 +275,17 @@ namespace Raktar.App.Forms
 				selectedEntryID = ((StockSummary)gridStock.SelectedRows[0].Tag).ItemID;
 			}
 
-			gridStock.Rows.Clear();
-
-			List<StockSummary> summary = ComplexQueries.GetStockSummary();
-
-			foreach (StockSummary sum in summary)
-			{
-				DataGridViewRow newRow = AddStockEntry(sum);
-
-				if (selectedEntryID != -1 && sum.ItemID == selectedEntryID)
+			DataGridManager.AddDataGridEntries<StockSummary>(gridStock, ComplexQueries.GetStockSummary(), true, new Action<DataGridViewRow>(
+				(DataGridViewRow row) =>
 				{
-					newRow.Selected = true;
+					StockSummary sum = (StockSummary)row.Tag;
+
+					if (selectedEntryID != -1 && sum.ItemID == selectedEntryID)
+					{
+						row.Selected = true;
+					}
 				}
-			}
-		}
-
-		private DataGridViewRow AddStockEntry(StockSummary w)
-		{
-			DataGridViewRow row = new DataGridViewRow();
-			row.CreateCells(gridStock);
-
-			UpdateStockRowCells(row, w);
-
-			gridStock.Rows.Add(row);
-
-			return row;
-		}
-
-		private void UpdateStockRowCells(DataGridViewRow row, StockSummary w)
-		{
-			row.Cells[0].Value = w.ItemName;
-			row.Cells[1].Value = w.Count;
-
-			row.Tag = w;
+			));
 		}
 
 		private void gridStock_SelectionChanged(object sender, System.EventArgs e)

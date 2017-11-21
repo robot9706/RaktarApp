@@ -39,12 +39,8 @@ namespace Raktar.App.Forms
 					this.Text = "Készlet - \"" + item.Name + "\"";
 				}
 
-				List<WarehouseStock> stock = ComplexQueries.GetItemStock(_stockItemID);
-
-				foreach (WarehouseStock s in stock)
-				{
-					AddStockEntry(s);
-				}
+				//Adat
+				DataGridManager.AddDataGridEntries<WarehouseStock>(gridStock, ComplexQueries.GetItemStock(_stockItemID));
 
 				gridStock.Focus();
 			}
@@ -54,24 +50,6 @@ namespace Raktar.App.Forms
 		private void btnOK_Click(object sender, System.EventArgs e)
 		{
 			DialogResult = System.Windows.Forms.DialogResult.OK;
-		}
-
-		private void AddStockEntry(WarehouseStock w)
-		{
-			DataGridViewRow row = new DataGridViewRow();
-			row.CreateCells(gridStock);
-
-			UpdateStockRowCells(row, w);
-
-			gridStock.Rows.Add(row);
-		}
-
-		private void UpdateStockRowCells(DataGridViewRow row, WarehouseStock w)
-		{
-			row.Cells[0].Value = w.WarehouseName;
-			row.Cells[1].Value = w.ItemCount;
-
-			row.Tag = w;
 		}
 
 		private void gridStock_SelectionChanged(object sender, System.EventArgs e)
@@ -152,7 +130,7 @@ namespace Raktar.App.Forms
 				{
 					stock.ItemCount = count;
 
-					UpdateStockRowCells(gridStock.SelectedRows[0], stock);
+					DataGridManager.UpdateRow<WarehouseStock>(gridStock.SelectedRows[0], stock);
 
 					DataChanged = true;
 

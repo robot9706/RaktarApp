@@ -13,7 +13,7 @@ namespace Raktar.Database
 		[DatabaseColumn(2, "ItemID", true, false)]
 		public int ItemID;
 
-		[DatabaseColumn(3, "Date")]
+		[DatabaseColumn(3, "Date", true, false)]
 		public DateTime Date;
 
 		[DatabaseColumn(4, "Count")]
