@@ -27,7 +27,7 @@ namespace Raktar.App.Data
 		private static string _warehouseStockQuery =
 			"SELECT warehouse.Name AS 'WarehouseName', warehouse.ID AS 'WarehouseID', stock.Count AS 'ItemCount' " +
 			"FROM warehouse, stock " +
-			"WHERE warehouse.ID = stock.Warehouse AND stock.ItemID = ?;";
+			"WHERE warehouse.ID = stock.WarehouseID AND stock.ItemID = ?;";
 
 		private static string _shipmentSummaryQuery =
 			"SELECT shipment.WarehouseFrom, shipment.WarehouseTo, shipment.ItemID, shipment.Date, shipment.Count, " +
@@ -267,9 +267,9 @@ namespace Raktar.App.Data
 		}
 
 		private static string _statQuery3 =
-			"SELECT warehouse.Name AS 'WarehouseName', items.Name AS 'ItemName' " +
-			"FROM stock, warehouse, items " +
-			"WHERE warehouse.ID = stock.Warehouse AND items.ItemID = stock.ItemID " +
+			"SELECT warehouse.Name AS 'WarehouseName', item.Name AS 'ItemName' " +
+			"FROM stock, warehouse, item " +
+			"WHERE warehouse.ID = stock.WarehouseID AND item.ID = stock.ItemID " +
 			"AND stock.ItemID = " +
 			"( " +
 				"SELECT stock.ItemID " +

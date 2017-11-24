@@ -1,0 +1,73 @@
+CREATE TABLE category (
+	ID INT PRIMARY KEY AUTO_INCREMENT,
+	Name varchar(64)
+) ENGINE = InnoDB;
+
+CREATE TABLE item (
+	ID INT PRIMARY KEY AUTO_INCREMENT,
+	Name varchar(64),
+	Price double,
+	Description varchar(128),
+	CategoryID INT,
+	FOREIGN KEY (CategoryID)
+		REFERENCES category(ID)
+) ENGINE = InnoDB;
+
+CREATE TABLE partner (
+	ID INT PRIMARY KEY AUTO_INCREMENT,
+	Name varchar(64),
+	PostCode varchar(16),
+	City varchar(64),
+	Street varchar(64),
+	StreetNumber INT,
+	Telephone varchar(32),
+	Email varchar(32)
+) ENGINE = InnoDB;
+
+CREATE TABLE warehouse (
+	ID INT PRIMARY KEY AUTO_INCREMENT,
+	Name varchar(64),
+	PostCode varchar(16),
+	City varchar(64),
+	Street varchar(64),
+	StreetNumber INT
+) ENGINE = InnoDB;
+
+CREATE TABLE stock (
+	ItemID INT,
+	WarehouseID INT,
+	Count INT,
+	FOREIGN KEY (ItemID)
+		REFERENCES item(ID),
+	FOREIGN KEY (WarehouseID)
+		REFERENCES warehouse(ID)
+) ENGINE = InnoDB;
+
+CREATE TABLE shipment (
+	WarehouseFrom INT,
+	WarehouseTo INT,
+	ItemID INT,
+	Date DATE UNIQUE,
+	Count INT,
+	FOREIGN KEY (WarehouseFrom)
+		REFERENCES warehouse(ID),
+	FOREIGN KEY (WarehouseTo)
+		REFERENCES warehouse(ID),
+	FOREIGN KEY (ItemID)
+		REFERENCES item(ID)
+) ENGINE = InnoDB;
+
+CREATE TABLE partnershipment (
+	PartnerID INT,
+	ItemID INT,
+	WarehouseID INT,
+	Date DATE UNIQUE,
+	Count INT,
+	Sell BIT,
+	FOREIGN KEY (PartnerID)
+		REFERENCES partner(ID),
+	FOREIGN KEY (ItemID)
+		REFERENCES item(ID),
+	FOREIGN KEY (WarehouseID)
+		REFERENCES warehouse(ID)
+) ENGINE = InnoDB;
