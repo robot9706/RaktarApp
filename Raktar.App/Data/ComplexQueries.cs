@@ -1,6 +1,7 @@
 ﻿using Raktar.Database;
 using System;
 using System.Collections.Generic;
+using System.Data.Odbc;
 
 namespace Raktar.App.Data
 {
@@ -26,7 +27,7 @@ namespace Raktar.App.Data
 		private static string _warehouseStockQuery =
 			"SELECT warehouse.Name AS 'WarehouseName', warehouse.ID AS 'WarehouseID', stock.Count AS 'ItemCount' " +
 			"FROM warehouse, stock " +
-			"WHERE warehouse.ID = stock.Warehouse AND stock.ItemID = {0};";
+			"WHERE warehouse.ID = stock.Warehouse AND stock.ItemID = ?;";
 
 		private static string _shipmentSummaryQuery =
 			"SELECT shipment.WarehouseFrom, shipment.WarehouseTo, shipment.ItemID, shipment.Date, shipment.Count, " +
@@ -39,7 +40,7 @@ namespace Raktar.App.Data
 			"W1.Name AS 'WarehouseFromName', W2.Name AS 'WarehouseToName', items.Name as 'ItemName' " +
 			"FROM shipment, warehouse AS W1, warehouse as W2, items " +
 			"WHERE items.ItemID = shipment.ItemID AND W1.ID = shipment.WarehouseFrom AND W2.ID = shipment.WarehouseTo AND " +
-			"shipment.WarehouseFrom = {0} AND shipment.WarehouseTo = {1} AND shipment.ItemID = {2} AND shipment.Date = {3};";
+			"shipment.WarehouseFrom = ? AND shipment.WarehouseTo = ? AND shipment.ItemID = ? AND shipment.Date = ?;";
 
 		private static string _partnerShipmentSummaryQuery =
 			"SELECT partnershipment.PartnerID, partnershipment.ItemID, partnershipment.WarehouseID, partnershipment.Date, partnershipment.Count, partnershipment.Sell, " +
@@ -52,7 +53,7 @@ namespace Raktar.App.Data
 			"partner.Name AS 'PartnerName', warehouse.Name AS 'WarehouseName', items.Name AS 'ItemName' " +
 			"FROM partnershipment, partner, items, warehouse " +
 			"WHERE partnershipment.ItemID = items.ItemID AND partnershipment.PartnerID = partner.ID AND partnershipment.WarehouseID = warehouse.ID AND " +
-			"partnershipment.PartnerID = {0} AND partnershipment.ItemID = {1} AND partnershipment.WarehouseID = {2} AND partnershipment.Date = {3};";
+			"partnershipment.PartnerID = ? AND partnershipment.ItemID = ? AND partnershipment.WarehouseID = ? AND partnershipment.Date = ?;";
 
 		public static List<ItemWithCategory> GetItemsWithCategories()
 		{
@@ -66,7 +67,7 @@ namespace Raktar.App.Data
 
 		public static List<WarehouseStock> GetItemStock(int itemID)
 		{
-			return Global.Database.Select<WarehouseStock>(String.Format(_warehouseStockQuery, itemID));
+			return Global.Database.Select<WarehouseStock>(_warehouseStockQuery, new OdbcParameter("@itemID", itemID));
 		}
 
 		public static List<PartnerShipmentSummary> GetPartnerShipmentSummary()
@@ -76,13 +77,13 @@ namespace Raktar.App.Data
 
 		public static PartnerShipmentSummary GetPartnerShipmentSummary(PartnerShipment source)
 		{
-			List<PartnerShipmentSummary> data = Global.Database.Select<PartnerShipmentSummary>(String.Format(
+			List<PartnerShipmentSummary> data = Global.Database.Select<PartnerShipmentSummary>(
 				_partnerShipmentDetailedSummaryQuery,
-				ObjectParser.FormatPrimitiveValue(source.PartnerID),
-				ObjectParser.FormatPrimitiveValue(source.ItemID),
-				ObjectParser.FormatPrimitiveValue(source.WarehouseID),
-				ObjectParser.FormatPrimitiveValue(source.Date)
-				));
+				new OdbcParameter("@PartnerID", source.PartnerID),
+				new OdbcParameter("@ItemID", source.ItemID),
+				new OdbcParameter("@WarehouseID", source.WarehouseID),
+				new OdbcParameter("@Date", source.Date)
+				);
 
 			if (data != null && data.Count > 0)
 				return data[0];
@@ -158,13 +159,13 @@ namespace Raktar.App.Data
 
 		public static ShipmentSummary GetShipmentSummary(Shipment source)
 		{
-			List<ShipmentSummary> data = Global.Database.Select<ShipmentSummary>(String.Format(
+			List<ShipmentSummary> data = Global.Database.Select<ShipmentSummary>(
 				_shipmentSummaryDetailedQuery,
-				ObjectParser.FormatPrimitiveValue(source.WarehouseFrom),
-				ObjectParser.FormatPrimitiveValue(source.WarehouseTo),
-				ObjectParser.FormatPrimitiveValue(source.ItemID),
-				ObjectParser.FormatPrimitiveValue(source.Date)
-				));
+				new OdbcParameter("@WarehouseFrom", source.WarehouseFrom),
+				new OdbcParameter("@WarehouseTo", source.WarehouseTo),
+				new OdbcParameter("@ItemID", source.ItemID),
+				new OdbcParameter("@Date", source.Date)
+				);
 
 			if (data != null && data.Count > 0)
 				return data[0];

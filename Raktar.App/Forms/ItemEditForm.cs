@@ -61,7 +61,7 @@ namespace Raktar.App.Forms
 			if (cbCategory.SelectedIndex > -1)
 				lastSelectedID = ((Category)cbCategory.SelectedItem).CategoryID;
 
-			if (selectEditCategory)
+			if (selectEditCategory && _edit != null)
 				lastSelectedID = _edit.CategoryID;
 
 			cbCategory.Items.Clear();

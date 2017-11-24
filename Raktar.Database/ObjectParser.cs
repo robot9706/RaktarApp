@@ -88,7 +88,7 @@ namespace Raktar.Database
 			return newItem;
 		}
 
-		public string BuildInsertStatement<T>(T value)
+		public string BuildInsertStatement<T>(T value, OdbcCommand command)
 		{
 			List<string> columns = new List<string>();
 			List<string> values = new List<string>();
@@ -102,13 +102,15 @@ namespace Raktar.Database
 
 				object fieldValue = pair.Value.Field.GetValue(value);
 
-				values.Add(FormatPrimitiveValue(fieldValue));
+				values.Add("?");
+
+				command.Parameters.Add(new OdbcParameter("@i" + pair.Value.Name, fieldValue));
 			}
 
 			return "(" + String.Join(", ", columns) + ") VALUES (" + String.Join(", ", values) + ")";
 		}
 
-		public string BuildKeyCondition<T>(T value)
+		public string BuildKeyCondition<T>(T value, OdbcCommand command)
 		{
 			List<string> conditionList = new List<string>();
 
@@ -119,13 +121,15 @@ namespace Raktar.Database
 
 				object fieldValue = pair.Value.Field.GetValue(value);
 
-				conditionList.Add(pair.Value.Name + "=" + FormatPrimitiveValue(fieldValue));
+				command.Parameters.Add(new OdbcParameter("@k" + pair.Value.Name, fieldValue));
+
+				conditionList.Add(pair.Value.Name + "=?");
 			}
 
 			return String.Join(" AND ", conditionList);
 		}
 
-		public string BuildValueConditions<T>(T value)
+		public string BuildValueConditions<T>(T value, OdbcCommand command)
 		{
 			List<string> valueList = new List<string>();
 
@@ -136,7 +140,9 @@ namespace Raktar.Database
 
 				object fieldValue = pair.Value.Field.GetValue(value);
 
-				valueList.Add(pair.Value.Name + "=" + FormatPrimitiveValue(fieldValue));
+				command.Parameters.Add(new OdbcParameter("@v" + pair.Value.Name, fieldValue));
+
+				valueList.Add(pair.Value.Name + "=?");
 			}
 
 			return String.Join(", ", valueList);

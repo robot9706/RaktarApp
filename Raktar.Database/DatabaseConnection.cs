@@ -52,7 +52,7 @@ namespace Raktar.Database
 			return _parsers[objectType];
 		}
 
-		public List<T> Select<T>(string selectQuery)
+		public List<T> Select<T>(string selectQuery, params OdbcParameter[] parameters)
 		{
 			ObjectParser parser = GetParser<T>();
 
@@ -60,6 +60,9 @@ namespace Raktar.Database
 
 			using (OdbcCommand command = new OdbcCommand(selectQuery, _database))
 			{
+				if (parameters != null)
+					command.Parameters.AddRange(parameters);
+
 				using (OdbcDataReader reader = command.ExecuteReader())
 				{
 					while (reader.Read())
@@ -142,10 +145,11 @@ namespace Raktar.Database
 		{
 			ObjectParser parser = GetParser<T>();
 
-			string query = "INSERT INTO " + table + " " + parser.BuildInsertStatement<T>(newValue) + ";";
-
-			using (OdbcCommand command = new OdbcCommand(query, _database))
+			using (OdbcCommand command = new OdbcCommand())
 			{
+				command.Connection = _database;
+				command.CommandText = "INSERT INTO " + table + " " + parser.BuildInsertStatement<T>(newValue, command) + ";";
+
 				if (command.ExecuteNonQuery() != 0)
 				{
 					if (parser.HasAutoIncrementKey)
@@ -162,10 +166,11 @@ namespace Raktar.Database
 		{
 			ObjectParser parser = GetParser<T>();
 
-			string query = "DELETE FROM " + table + " WHERE " + parser.BuildKeyCondition<T>(value) + ";";
-
-			using (OdbcCommand command = new OdbcCommand(query, _database))
+			using (OdbcCommand command = new OdbcCommand())
 			{
+				command.Connection = _database;
+				command.CommandText = "DELETE FROM " + table + " WHERE " + parser.BuildKeyCondition<T>(value, command) + ";";
+
 				return (command.ExecuteNonQuery() != 0);
 			}
 		}
@@ -174,18 +179,11 @@ namespace Raktar.Database
 		{
 			ObjectParser parser = GetParser<T>();
 
-			string query = "UPDATE " + table + " SET " + parser.BuildValueConditions<T>(value) + " WHERE " + parser.BuildKeyCondition<T>(value) + ";";
-
-			using (OdbcCommand command = new OdbcCommand(query, _database))
+			using (OdbcCommand command = new OdbcCommand())
 			{
-				return (command.ExecuteNonQuery() != 0);
-			}
-		}
+				command.Connection = _database;
+				command.CommandText = "UPDATE " + table + " SET " + parser.BuildValueConditions<T>(value, command) + " WHERE " + parser.BuildKeyCondition<T>(value, command) + ";";
 
-		public bool RunQuery(string query)
-		{
-			using (OdbcCommand command = new OdbcCommand(query, _database))
-			{
 				return (command.ExecuteNonQuery() != 0);
 			}
 		}
