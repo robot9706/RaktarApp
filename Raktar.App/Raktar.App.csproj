@@ -62,10 +62,13 @@
     <Compile Include="Data\ComplexQueries.cs" />
     <Compile Include="Data\DataGridManager.cs" />
     <Compile Include="Data\ItemWithCategory.cs" />
+    <Compile Include="Data\PartnerBuyStatistics.cs" />
+    <Compile Include="Data\PartnerSellStatistics.cs" />
     <Compile Include="Data\PartnerShipmentSummary.cs" />
     <Compile Include="Data\ShipmentSummary.cs" />
     <Compile Include="Data\StockSummary.cs" />
     <Compile Include="Data\WarehouseStock.cs" />
+    <Compile Include="Data\WarehouseStockStatistics.cs" />
     <Compile Include="Forms\AppDesign.cs" />
     <Compile Include="Forms\AppForm.cs">
       <SubType>Form</SubType>

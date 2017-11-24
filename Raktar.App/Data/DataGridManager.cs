@@ -16,6 +16,9 @@ namespace Raktar.App.Data
 			{ typeof(WarehouseStock), new Action<DataGridViewRow, object>(FillWarehouseStock) },
 			{ typeof(ShipmentSummary), new Action<DataGridViewRow, object>(FillShipmentSummary) },
 			{ typeof(PartnerShipmentSummary), new Action<DataGridViewRow, object>(FillPartnerShipmentSummary) },
+			{ typeof(PartnerSellStatistics), new Action<DataGridViewRow, object>(FillPartnerSellStatistics) },
+			{ typeof(PartnerBuyStatistics), new Action<DataGridViewRow, object>(FillPartnerBuyStatistics) },
+			{ typeof(WarehouseStockStatistics), new Action<DataGridViewRow, object>(FillWarehouseStockStatistics) },
 		};
 
 		public static void AddDataGridEntries<T>(DataGridView grid, List<T> values, bool clear = true, Action<DataGridViewRow> rowAction = null)
@@ -143,6 +146,35 @@ namespace Raktar.App.Data
 				row.Cells[3].Value = ship.Date;
 				row.Cells[4].Value = ship.Count;
 				row.Cells[5].Value = (ship.IsSell ? "Eladás" : "Vétel");
+			}
+		}
+
+		private static void FillPartnerSellStatistics(DataGridViewRow row, object data)
+		{
+			if (data is PartnerSellStatistics stat)
+			{
+				row.Cells[0].Value = stat.SellCount;
+				row.Cells[1].Value = stat.PartnerName;
+				row.Cells[2].Value = stat.Date;
+			}
+		}
+
+		private static void FillPartnerBuyStatistics(DataGridViewRow row, object data)
+		{
+			if (data is PartnerBuyStatistics stat)
+			{
+				row.Cells[0].Value = stat.PartnerName;
+				row.Cells[1].Value = stat.ItemName;
+				row.Cells[2].Value = stat.Count;
+			}
+		}
+
+		private static void FillWarehouseStockStatistics(DataGridViewRow row, object data)
+		{
+			if (data is WarehouseStockStatistics stat)
+			{
+				row.Cells[0].Value = stat.WarehouseName;
+				row.Cells[1].Value = stat.ItemName;
 			}
 		}
 	}

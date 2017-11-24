@@ -555,5 +555,22 @@ namespace Raktar.App.Forms
 			}
 		}
 		#endregion
+
+		#region Stat page
+		private void btnStat1_Click(object sender, EventArgs e)
+		{
+			DataGridManager.AddDataGridEntries<PartnerSellStatistics>(gridStat1, ComplexQueries.GetPartnerSellStatistics());
+		}
+
+		private void btnStat2_Click(object sender, EventArgs e)
+		{
+			DataGridManager.AddDataGridEntries<PartnerBuyStatistics>(gridStat2, ComplexQueries.GetPartnerBuyStatistics());
+		}
+
+		private void btnStat3_Click(object sender, EventArgs e)
+		{
+			DataGridManager.AddDataGridEntries<WarehouseStockStatistics>(gridStat3, ComplexQueries.GetWarehouseStatistics());
+		}
+		#endregion
 	}
 }

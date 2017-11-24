@@ -84,6 +84,7 @@ namespace Raktar.Database
 			List<T> result = new List<T>();
 
 			string query = "SELECT * FROM `" + from + "`";
+			//Pl: "SELECT * FROM `warehouse`"
 
 			using (OdbcCommand command = new OdbcCommand(query, _database))
 			{
@@ -124,6 +125,7 @@ namespace Raktar.Database
 			}
 
 			string query = "SELECT * FROM `" + from + "` WHERE " + String.Join(" AND ", conds);
+			//Pl.: SELECT * FROM `stock` WHERE ItemID=3 AND Warehouse=3
 
 			using (OdbcCommand command = new OdbcCommand(query, _database))
 			{
@@ -149,6 +151,7 @@ namespace Raktar.Database
 			{
 				command.Connection = _database;
 				command.CommandText = "INSERT INTO " + table + " " + parser.BuildInsertStatement<T>(newValue, command) + ";";
+				//Pl.: INSERT INTO shipment (WarehouseFrom, WarehouseTo, ItemID, Date, Count) VALUES (?, ?, ?, ?, ?);
 
 				if (command.ExecuteNonQuery() != 0)
 				{
@@ -170,6 +173,7 @@ namespace Raktar.Database
 			{
 				command.Connection = _database;
 				command.CommandText = "DELETE FROM " + table + " WHERE " + parser.BuildKeyCondition<T>(value, command) + ";";
+				//Pl.: DELETE FROM shipment WHERE WarehouseFrom=? AND WarehouseTo=? AND ItemID=? AND Date=?;
 
 				return (command.ExecuteNonQuery() != 0);
 			}
@@ -183,6 +187,7 @@ namespace Raktar.Database
 			{
 				command.Connection = _database;
 				command.CommandText = "UPDATE " + table + " SET " + parser.BuildValueConditions<T>(value, command) + " WHERE " + parser.BuildKeyCondition<T>(value, command) + ";";
+				//Pl.: UPDATE stock SET Count=? WHERE ItemID=? AND Warehouse=?;
 
 				return (command.ExecuteNonQuery() != 0);
 			}

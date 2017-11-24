@@ -1,5 +1,4 @@
 ﻿using Raktar.Database;
-using System;
 using System.Collections.Generic;
 using System.Data.Odbc;
 
@@ -7,6 +6,7 @@ namespace Raktar.App.Data
 {
 	class ComplexQueries
 	{
+		#region Stock handling queries
 		public enum ShipmentStatus
 		{
 			DatabaseError,
@@ -82,7 +82,7 @@ namespace Raktar.App.Data
 				new OdbcParameter("@PartnerID", source.PartnerID),
 				new OdbcParameter("@ItemID", source.ItemID),
 				new OdbcParameter("@WarehouseID", source.WarehouseID),
-				new OdbcParameter("@Date", source.Date)
+				new OdbcParameter("@Date", OdbcType.Date) { Value = source.Date }
 				);
 
 			if (data != null && data.Count > 0)
@@ -164,7 +164,7 @@ namespace Raktar.App.Data
 				new OdbcParameter("@WarehouseFrom", source.WarehouseFrom),
 				new OdbcParameter("@WarehouseTo", source.WarehouseTo),
 				new OdbcParameter("@ItemID", source.ItemID),
-				new OdbcParameter("@Date", source.Date)
+				new OdbcParameter("@Date", OdbcType.Date) { Value = source.Date }
 				);
 
 			if (data != null && data.Count > 0)
@@ -239,5 +239,51 @@ namespace Raktar.App.Data
 
 			return ShipmentStatus.OK;
 		}
+		#endregion
+
+		#region Statistics queries
+		private static string _statQuery1 =
+			"SELECT Count(*) AS 'Count', partner.Name AS 'PartnerName', partnershipment.Date AS 'Date' " +
+			"FROM partnershipment, partner " +
+			"WHERE partnershipment.Sell = 1 AND partner.ID = partnershipment.PartnerID " +
+			"GROUP BY partnershipment.Date, partnershipment.PartnerID " +
+			"ORDER BY partnershipment.Date DESC";
+
+		public static List<PartnerSellStatistics> GetPartnerSellStatistics()
+		{
+			return Global.Database.Select<PartnerSellStatistics>(_statQuery1);
+		}
+
+		private static string _statQuery2 =
+			"SELECT partner.Name AS 'PartnerName', items.Name AS 'ItemName', SUM(partnershipment.Count) AS 'ItemCount' " +
+			"FROM partnershipment, items, partner " +
+			"WHERE items.ItemID = partnershipment.ItemID AND partner.ID = partnershipment.PartnerID AND partnershipment.Sell = 0 " +
+			"GROUP BY partnershipment.PartnerID, partnershipment.ItemID " +
+			"ORDER BY SUM(partnershipment.Count) DESC, partnershipment.Date DESC";
+
+		public static List<PartnerBuyStatistics> GetPartnerBuyStatistics()
+		{
+			return Global.Database.Select<PartnerBuyStatistics>(_statQuery2);
+		}
+
+		private static string _statQuery3 =
+			"SELECT warehouse.Name AS 'WarehouseName', items.Name AS 'ItemName' " +
+			"FROM stock, warehouse, items " +
+			"WHERE warehouse.ID = stock.Warehouse AND items.ItemID = stock.ItemID " +
+			"AND stock.ItemID = " +
+			"( " +
+				"SELECT stock.ItemID " +
+				"FROM stock " +
+				"GROUP BY stock.ItemID " +
+				"ORDER BY SUM(stock.Count) DESC " +
+				"LIMIT 1 " +
+			") " + 
+			"ORDER BY warehouse.Name";
+
+		public static List<WarehouseStockStatistics> GetWarehouseStatistics()
+		{
+			return Global.Database.Select<WarehouseStockStatistics>(_statQuery3);
+		}
+		#endregion
 	}
 }
