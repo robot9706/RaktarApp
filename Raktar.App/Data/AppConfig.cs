@@ -2,7 +2,7 @@
 {
 	class AppConfig
 	{
-		public const string FileName = "app.config";
+		public const string FileName = "application.config";
 
 		public static AppConfig Default = new AppConfig()
 		{
