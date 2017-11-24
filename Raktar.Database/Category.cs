@@ -2,8 +2,8 @@
 {
 	public class Category
 	{
-		[DatabaseColumn(0, "CategoryID", true, true)]
-		public int CategoryID;
+		[DatabaseColumn(0, "ID", true, true)]
+		public int ID;
 
 		[DatabaseColumn(1, "Name")]
 		public string Name;

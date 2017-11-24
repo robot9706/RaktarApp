@@ -33,7 +33,7 @@ namespace Raktar.App.Forms
 			SuspendLayout();
 			{
 				//Fejléc
-				Item item = Global.Database.SelectOne<Item>("items", new Dictionary<string, object>() { { "ItemID", _stockItemID } });
+				Item item = Global.Database.SelectOne<Item>("item", new Dictionary<string, object>() { { "ItemID", _stockItemID } });
 				if (item != null)
 				{
 					this.Text = "Készlet - \"" + item.Name + "\"";

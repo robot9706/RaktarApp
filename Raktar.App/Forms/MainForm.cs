@@ -131,7 +131,7 @@ namespace Raktar.App.Forms
 			{
 				ItemWithCategory item = (ItemWithCategory)row.Tag;
 
-				if (!Global.Database.DeleteFrom<Item>("items", item))
+				if (!Global.Database.DeleteFrom<Item>("item", item))
 				{
 					Error("Hiba a sor törlése közben! \"" + item.Name + "\"", "Hiba!");
 					return;
@@ -149,7 +149,7 @@ namespace Raktar.App.Forms
 				{
 					ItemWithCategory newItem = edit.EditedItem;
 
-					if (Global.Database.InsertInto<Item>("items", newItem))
+					if (Global.Database.InsertInto<Item>("item", newItem))
 					{
 						DataGridManager.AddDataGridEntry<ItemWithCategory>(gridItems, newItem);
 					}
@@ -172,7 +172,7 @@ namespace Raktar.App.Forms
 			{
 				if (itemEdit.ShowDialog(this) == DialogResult.OK)
 				{
-					if (Global.Database.Update<Item>("items", itemEdit.EditedItem))
+					if (Global.Database.Update<Item>("item", itemEdit.EditedItem))
 					{
 						DataGridManager.UpdateRow<ItemWithCategory>(row, itemEdit.EditedItem);
 					}

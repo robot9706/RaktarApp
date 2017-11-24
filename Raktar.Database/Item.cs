@@ -2,7 +2,7 @@
 {
     public class Item
     {
-		[DatabaseColumn(0, "ItemID", true, true)]
+		[DatabaseColumn(0, "ID", true, true)]
 		public int ID;
 
 		[DatabaseColumn(1, "Name")]

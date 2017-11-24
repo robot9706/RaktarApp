@@ -33,7 +33,7 @@ namespace Raktar.App.Forms
 
 		private void NewPartnerShipmentForm_Load(object sender, System.EventArgs e)
 		{
-			List<Item> items = Global.Database.SelectAll<Item>("items");
+			List<Item> items = Global.Database.SelectAll<Item>("item");
 			if (items != null)
 			{
 				items = items.OrderBy(o => o.Name).ToList();

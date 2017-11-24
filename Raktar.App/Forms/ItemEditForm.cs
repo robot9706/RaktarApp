@@ -26,7 +26,7 @@ namespace Raktar.App.Forms
 				item.Description = tbDescription.Text;
 
 				Category cat = ((Category)cbCategory.SelectedItem);
-				item.CategoryID = cat.CategoryID;
+				item.CategoryID = cat.ID;
 				item.CategoryName = cat.Name;
 
 				return item;
@@ -59,7 +59,7 @@ namespace Raktar.App.Forms
 		{
 			int lastSelectedID = -1;
 			if (cbCategory.SelectedIndex > -1)
-				lastSelectedID = ((Category)cbCategory.SelectedItem).CategoryID;
+				lastSelectedID = ((Category)cbCategory.SelectedItem).ID;
 
 			if (selectEditCategory && _edit != null)
 				lastSelectedID = _edit.CategoryID;
@@ -73,7 +73,7 @@ namespace Raktar.App.Forms
 
 				for (int x = 0; x < cbCategory.Items.Count; x++)
 				{
-					if (((Category)cbCategory.Items[x]).CategoryID == lastSelectedID)
+					if (((Category)cbCategory.Items[x]).ID == lastSelectedID)
 					{
 						cbCategory.SelectedIndex = x;
 						break;

@@ -15,14 +15,14 @@ namespace Raktar.App.Data
 		}
 
 		private static string _itemsWithCategoriesQuery =
-			"SELECT items.ItemID, items.Name, items.Price, items.Description, items.CategoryID, category.Name AS 'CategoryName' " +
-			"FROM `items`, `category` " +
-			"WHERE category.CategoryID = items.CategoryID;";
+			"SELECT item.ID, item.Name, item.Price, item.Description, item.CategoryID, category.Name AS 'CategoryName' " +
+			"FROM `item`, `category` " +
+			"WHERE category.ID = item.CategoryID;";
 
 		private static string _stockSummaryQuery =
-			"SELECT stock.ItemID as 'ItemID', items.Name AS 'ItemName', SUM(stock.Count) as 'Count' " +
-			"FROM stock, items " +
-			"WHERE items.ItemID = stock.ItemID GROUP BY stock.ItemID;";
+			"SELECT stock.ItemID as 'ItemID', item.Name AS 'ItemName', SUM(stock.Count) as 'Count' " +
+			"FROM stock, item " +
+			"WHERE item.ID = stock.ItemID GROUP BY stock.ItemID;";
 
 		private static string _warehouseStockQuery =
 			"SELECT warehouse.Name AS 'WarehouseName', warehouse.ID AS 'WarehouseID', stock.Count AS 'ItemCount' " +
@@ -31,28 +31,28 @@ namespace Raktar.App.Data
 
 		private static string _shipmentSummaryQuery =
 			"SELECT shipment.WarehouseFrom, shipment.WarehouseTo, shipment.ItemID, shipment.Date, shipment.Count, " +
-			"W1.Name AS 'WarehouseFromName', W2.Name AS 'WarehouseToName', items.Name as 'ItemName' " +
-			"FROM shipment, warehouse AS W1, warehouse as W2, items " +
-			"WHERE items.ItemID = shipment.ItemID AND W1.ID = shipment.WarehouseFrom AND W2.ID = shipment.WarehouseTo;";
+			"W1.Name AS 'WarehouseFromName', W2.Name AS 'WarehouseToName', item.Name as 'ItemName' " +
+			"FROM shipment, warehouse AS W1, warehouse as W2, item " +
+			"WHERE item.ID = shipment.ItemID AND W1.ID = shipment.WarehouseFrom AND W2.ID = shipment.WarehouseTo;";
 
 		private static string _shipmentSummaryDetailedQuery =
 			"SELECT shipment.WarehouseFrom, shipment.WarehouseTo, shipment.ItemID, shipment.Date, shipment.Count, " +
-			"W1.Name AS 'WarehouseFromName', W2.Name AS 'WarehouseToName', items.Name as 'ItemName' " +
-			"FROM shipment, warehouse AS W1, warehouse as W2, items " +
-			"WHERE items.ItemID = shipment.ItemID AND W1.ID = shipment.WarehouseFrom AND W2.ID = shipment.WarehouseTo AND " +
+			"W1.Name AS 'WarehouseFromName', W2.Name AS 'WarehouseToName', item.Name as 'ItemName' " +
+			"FROM shipment, warehouse AS W1, warehouse as W2, item " +
+			"WHERE item.ID = shipment.ItemID AND W1.ID = shipment.WarehouseFrom AND W2.ID = shipment.WarehouseTo AND " +
 			"shipment.WarehouseFrom = ? AND shipment.WarehouseTo = ? AND shipment.ItemID = ? AND shipment.Date = ?;";
 
 		private static string _partnerShipmentSummaryQuery =
 			"SELECT partnershipment.PartnerID, partnershipment.ItemID, partnershipment.WarehouseID, partnershipment.Date, partnershipment.Count, partnershipment.Sell, " +
-			"partner.Name AS 'PartnerName', warehouse.Name AS 'WarehouseName', items.Name AS 'ItemName' " +
-			"FROM partnershipment, partner, items, warehouse " +
-			"WHERE partnershipment.ItemID = items.ItemID AND partnershipment.PartnerID = partner.ID AND partnershipment.WarehouseID = warehouse.ID;";
+			"partner.Name AS 'PartnerName', warehouse.Name AS 'WarehouseName', item.Name AS 'ItemName' " +
+			"FROM partnershipment, partner, item, warehouse " +
+			"WHERE partnershipment.ItemID = item.ID AND partnershipment.PartnerID = partner.ID AND partnershipment.WarehouseID = warehouse.ID;";
 
 		private static string _partnerShipmentDetailedSummaryQuery =
 			"SELECT partnershipment.PartnerID, partnershipment.ItemID, partnershipment.WarehouseID, partnershipment.Date, partnershipment.Count, partnershipment.Sell, " +
-			"partner.Name AS 'PartnerName', warehouse.Name AS 'WarehouseName', items.Name AS 'ItemName' " +
-			"FROM partnershipment, partner, items, warehouse " +
-			"WHERE partnershipment.ItemID = items.ItemID AND partnershipment.PartnerID = partner.ID AND partnershipment.WarehouseID = warehouse.ID AND " +
+			"partner.Name AS 'PartnerName', warehouse.Name AS 'WarehouseName', item.Name AS 'ItemName' " +
+			"FROM partnershipment, partner, item, warehouse " +
+			"WHERE partnershipment.ItemID = item.ID AND partnershipment.PartnerID = partner.ID AND partnershipment.WarehouseID = warehouse.ID AND " +
 			"partnershipment.PartnerID = ? AND partnershipment.ItemID = ? AND partnershipment.WarehouseID = ? AND partnershipment.Date = ?;";
 
 		public static List<ItemWithCategory> GetItemsWithCategories()
@@ -255,9 +255,9 @@ namespace Raktar.App.Data
 		}
 
 		private static string _statQuery2 =
-			"SELECT partner.Name AS 'PartnerName', items.Name AS 'ItemName', SUM(partnershipment.Count) AS 'ItemCount' " +
-			"FROM partnershipment, items, partner " +
-			"WHERE items.ItemID = partnershipment.ItemID AND partner.ID = partnershipment.PartnerID AND partnershipment.Sell = 0 " +
+			"SELECT partner.Name AS 'PartnerName', item.Name AS 'ItemName', SUM(partnershipment.Count) AS 'ItemCount' " +
+			"FROM partnershipment, item, partner " +
+			"WHERE item.ID = partnershipment.ItemID AND partner.ID = partnershipment.PartnerID AND partnershipment.Sell = 0 " +
 			"GROUP BY partnershipment.PartnerID, partnershipment.ItemID " +
 			"ORDER BY SUM(partnershipment.Count) DESC, partnershipment.Date DESC";
 
