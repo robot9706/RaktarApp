@@ -35,7 +35,7 @@ namespace Raktar.Database
 			DatabaseColumnAttribute attribute;
 			foreach (FieldInfo p in properties)
 			{
-				attribute = p.GetCustomAttribute<DatabaseColumnAttribute>();
+				attribute = GetAttribute<DatabaseColumnAttribute>(p);
 
 				if (attribute != null)
 				{
@@ -54,6 +54,19 @@ namespace Raktar.Database
 					}
 				}
 			}
+		}
+
+		private static T GetAttribute<T>(FieldInfo field) where T: Attribute
+		{
+			object[] atrs = field.GetCustomAttributes(true);
+
+			foreach(object atr in atrs)
+			{
+				if (atr.GetType().IsEquivalentTo(typeof(T)))
+					return (T)atr;
+			}
+
+			return null;
 		}
 
 		public static string FormatPrimitiveValue(object value, Type asType)
@@ -78,7 +91,7 @@ namespace Raktar.Database
 
 			foreach (KeyValuePair<int, ColumnInfo> prop in _fields)
 			{
-				object value = reader.GetFieldValue<object>(prop.Key);
+				object value = reader.GetValue(prop.Key);
 
 				object typeChangedValue = Convert.ChangeType(value, prop.Value.Field.FieldType);
 

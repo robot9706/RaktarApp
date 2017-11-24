@@ -47,27 +47,29 @@ CREATE TABLE shipment (
 	WarehouseFrom INT,
 	WarehouseTo INT,
 	ItemID INT,
-	Date DATE UNIQUE,
+	Date DATE,
 	Count INT,
 	FOREIGN KEY (WarehouseFrom)
 		REFERENCES warehouse(ID),
 	FOREIGN KEY (WarehouseTo)
 		REFERENCES warehouse(ID),
 	FOREIGN KEY (ItemID)
-		REFERENCES item(ID)
+		REFERENCES item(ID),
+	PRIMARY KEY (WarehouseFrom, WarehouseTo, ItemID, Date)
 ) ENGINE = InnoDB;
 
 CREATE TABLE partnershipment (
 	PartnerID INT,
 	ItemID INT,
 	WarehouseID INT,
-	Date DATE UNIQUE,
+	Date DATE,
 	Count INT,
-	Sell BIT,
+	Sell TINYINT(1),
 	FOREIGN KEY (PartnerID)
 		REFERENCES partner(ID),
 	FOREIGN KEY (ItemID)
 		REFERENCES item(ID),
 	FOREIGN KEY (WarehouseID)
-		REFERENCES warehouse(ID)
+		REFERENCES warehouse(ID),
+	PRIMARY KEY (PartnerID, ItemID, WarehouseID, Date)
 ) ENGINE = InnoDB;

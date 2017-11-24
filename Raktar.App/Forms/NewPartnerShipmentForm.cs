@@ -24,6 +24,8 @@ namespace Raktar.App.Forms
 			}
 		}
 
+		private List<Warehouse> _allWarehouse;
+
 		public NewPartnerShipmentForm()
 		{
 			InitializeComponent();
@@ -54,6 +56,10 @@ namespace Raktar.App.Forms
 					cbPartner.Items.Add(p);
 				}
 			}
+
+			_allWarehouse = Global.Database.SelectAll<Warehouse>("warehouse");
+			if (_allWarehouse == null)
+				_allWarehouse = new List<Warehouse>();
 		}
 
 		private void btnCancel_Click(object sender, System.EventArgs e)
@@ -65,15 +71,26 @@ namespace Raktar.App.Forms
 		{
 			if (ValidateInput())
 			{
+				Item item = ((Item)cbItem.Items[cbItem.SelectedIndex]);
+				WarehouseStock warehouse = ((WarehouseStock)cbWarehouse.Items[cbWarehouse.SelectedIndex]);
+				if (warehouse is EmptyWarehouseStock)
+				{
+					Stock newEmptyStock = new Stock()
+					{
+						Warehouse = warehouse.WarehouseID,
+						ItemID = item.ID,
+						Count = 0
+					};
+
+					Global.Database.InsertInto<Stock>("stock", newEmptyStock);
+				}
+
 				if (cbSell.Checked)
 				{
-					Item item = ((Item)cbItem.Items[cbItem.SelectedIndex]);
-					WarehouseStock warehouse = ((WarehouseStock)cbWarehouse.Items[cbWarehouse.SelectedIndex]);
-
 					Stock stock = Global.Database.SelectOne<Stock>("stock", new Dictionary<string, object>()
 					{
 						{ "ItemID", item.ID },
-						{ "Warehouse", warehouse.WarehouseID }
+						{ "WarehouseID", warehouse.WarehouseID }
 					});
 
 					int count = Convert.ToInt32(tbCount.Text);
@@ -99,6 +116,9 @@ namespace Raktar.App.Forms
 				Item item = ((Item)cbItem.Items[cbItem.SelectedIndex]);
 
 				List<WarehouseStock> stock = ComplexQueries.GetItemStock(item.ID);
+				int[] ids = stock.Select(x => x.WarehouseID).ToArray();
+
+				List<Warehouse> emptyWarehouse = _allWarehouse.Where(x => !ids.Contains(x.ID)).ToList();
 
 				if (stock != null && stock.Count > 0)
 				{
@@ -107,6 +127,20 @@ namespace Raktar.App.Forms
 					foreach(WarehouseStock s in stock)
 					{
 						cbWarehouse.Items.Add(s);
+					}
+				}
+
+				if (emptyWarehouse != null && emptyWarehouse.Count > 0)
+				{
+					emptyWarehouse = emptyWarehouse.OrderBy(s => s.Name).ToList();
+
+					foreach (Warehouse s in emptyWarehouse)
+					{
+						cbWarehouse.Items.Add(new EmptyWarehouseStock()
+						{
+							WarehouseID = s.ID,
+							WarehouseName = s.Name
+						});
 					}
 				}
 

@@ -96,7 +96,7 @@ namespace Raktar.App.Data
 			Stock stock = Global.Database.SelectOne<Stock>("stock", new Dictionary<string, object>()
 			{
 				{ "ItemID", shipment.ItemID },
-				{ "Warehouse", shipment.WarehouseID }
+				{ "WarehouseID", shipment.WarehouseID }
 			});
 
 			if (stock == null)
@@ -125,7 +125,7 @@ namespace Raktar.App.Data
 			Stock stock = Global.Database.SelectOne<Stock>("stock", new Dictionary<string, object>()
 			{
 				{ "ItemID", shipment.ItemID },
-				{ "Warehouse", shipment.WarehouseID }
+				{ "WarehouseID", shipment.WarehouseID }
 			});
 
 			if (stock == null)
@@ -178,13 +178,13 @@ namespace Raktar.App.Data
 			Stock stockFrom = Global.Database.SelectOne<Stock>("stock", new Dictionary<string, object>()
 			{
 				{ "ItemID", shipment.ItemID },
-				{ "Warehouse", shipment.WarehouseFrom }
+				{ "WarehouseID", shipment.WarehouseFrom }
 			});
 
 			Stock stockTo = Global.Database.SelectOne<Stock>("stock", new Dictionary<string, object>()
 			{
 				{ "ItemID", shipment.ItemID },
-				{ "Warehouse", shipment.WarehouseTo }
+				{ "WarehouseID", shipment.WarehouseTo }
 			});
 
 			if (stockFrom == null || stockTo == null)
@@ -210,13 +210,13 @@ namespace Raktar.App.Data
 			Stock stockFrom = Global.Database.SelectOne<Stock>("stock", new Dictionary<string, object>()
 			{
 				{ "ItemID", shipment.ItemID },
-				{ "Warehouse", shipment.WarehouseFrom }
+				{ "WarehouseID", shipment.WarehouseFrom }
 			});
 
 			Stock stockTo = Global.Database.SelectOne<Stock>("stock", new Dictionary<string, object>()
 			{
 				{ "ItemID", shipment.ItemID },
-				{ "Warehouse", shipment.WarehouseTo }
+				{ "WarehouseID", shipment.WarehouseTo }
 			});
 
 			if (stockFrom == null || stockTo == null)
