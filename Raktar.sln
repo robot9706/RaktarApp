@@ -12,6 +12,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DatabaseScripts", "Database
 		Etc\DatabaseScripts\DatabaseCreateTables.txt = Etc\DatabaseScripts\DatabaseCreateTables.txt
 		Etc\DatabaseScripts\Version1.sql = Etc\DatabaseScripts\Version1.sql
 		Etc\DatabaseScripts\Version2_Empty.sql = Etc\DatabaseScripts\Version2_Empty.sql
+		Etc\DatabaseScripts\Version2_WithData.sql = Etc\DatabaseScripts\Version2_WithData.sql
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Raktar.Database", "Raktar.Database\Raktar.Database.csproj", "{032CAC0B-67BA-47D9-9218-1B585221F988}"
