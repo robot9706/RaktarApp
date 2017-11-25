@@ -54,10 +54,10 @@
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle29 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle30 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.tabs = new MetroFramework.Controls.MetroTabControl();
 			this.pageWarehouse = new System.Windows.Forms.TabPage();
 			this.panelWarehouseTab = new MetroFramework.Controls.MetroPanel();
@@ -76,6 +76,10 @@
 			this.btnDeleteItem = new MetroFramework.Controls.MetroButton();
 			this.btnNewItem = new MetroFramework.Controls.MetroButton();
 			this.gridItems = new Raktar.App.Controls.FixedDataGridView();
+			this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.pagePartners = new System.Windows.Forms.TabPage();
 			this.panelPartners = new MetroFramework.Controls.MetroPanel();
 			this.btnEditPartner = new MetroFramework.Controls.MetroButton();
@@ -127,9 +131,6 @@
 			this.dataGridViewTextBoxColumn21 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.panelStat1Holder = new System.Windows.Forms.Panel();
 			this.gridStat1 = new Raktar.App.Controls.FixedDataGridView();
-			this.dataGridViewTextBoxColumn15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewTextBoxColumn17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewTextBoxColumn18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.btnStat2 = new MetroFramework.Controls.MetroButton();
 			this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
 			this.btnStat1 = new MetroFramework.Controls.MetroButton();
@@ -142,10 +143,9 @@
 			this.dataGridViewTextBoxColumn22 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataGridViewTextBoxColumn23 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
-			this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.tabs.SuspendLayout();
 			this.pageWarehouse.SuspendLayout();
 			this.panelWarehouseTab.SuspendLayout();
@@ -192,7 +192,7 @@
 			this.tabs.Controls.Add(this.pageStats2);
 			this.tabs.Location = new System.Drawing.Point(25, 63);
 			this.tabs.Name = "tabs";
-			this.tabs.SelectedIndex = 1;
+			this.tabs.SelectedIndex = 7;
 			this.tabs.Size = new System.Drawing.Size(953, 541);
 			this.tabs.TabIndex = 0;
 			this.tabs.UseSelectable = true;
@@ -464,6 +464,31 @@
 			this.gridItems.TabIndex = 3;
 			this.gridItems.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridItems_CellDoubleClick);
 			this.gridItems.SelectionChanged += new System.EventHandler(this.gridItems_SelectionChanged);
+			// 
+			// dataGridViewTextBoxColumn1
+			// 
+			this.dataGridViewTextBoxColumn1.HeaderText = "Név";
+			this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+			this.dataGridViewTextBoxColumn1.ReadOnly = true;
+			// 
+			// dataGridViewTextBoxColumn2
+			// 
+			this.dataGridViewTextBoxColumn2.HeaderText = "Ár";
+			this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+			this.dataGridViewTextBoxColumn2.ReadOnly = true;
+			// 
+			// dataGridViewTextBoxColumn3
+			// 
+			this.dataGridViewTextBoxColumn3.HeaderText = "Kategória";
+			this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+			this.dataGridViewTextBoxColumn3.ReadOnly = true;
+			this.dataGridViewTextBoxColumn3.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+			// 
+			// dataGridViewTextBoxColumn4
+			// 
+			this.dataGridViewTextBoxColumn4.HeaderText = "Leírás";
+			this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+			this.dataGridViewTextBoxColumn4.ReadOnly = true;
 			// 
 			// pagePartners
 			// 
@@ -1204,28 +1229,6 @@
 			this.gridStat1.Size = new System.Drawing.Size(426, 429);
 			this.gridStat1.TabIndex = 4;
 			// 
-			// dataGridViewTextBoxColumn15
-			// 
-			this.dataGridViewTextBoxColumn15.HeaderText = "Eladások száma";
-			this.dataGridViewTextBoxColumn15.Name = "dataGridViewTextBoxColumn15";
-			this.dataGridViewTextBoxColumn15.ReadOnly = true;
-			// 
-			// dataGridViewTextBoxColumn17
-			// 
-			this.dataGridViewTextBoxColumn17.HeaderText = "Partner";
-			this.dataGridViewTextBoxColumn17.Name = "dataGridViewTextBoxColumn17";
-			this.dataGridViewTextBoxColumn17.ReadOnly = true;
-			// 
-			// dataGridViewTextBoxColumn18
-			// 
-			dataGridViewCellStyle25.Format = "yyyy. MM. dd.";
-			this.dataGridViewTextBoxColumn18.DefaultCellStyle = dataGridViewCellStyle25;
-			this.dataGridViewTextBoxColumn18.HeaderText = "Dátum";
-			this.dataGridViewTextBoxColumn18.Name = "dataGridViewTextBoxColumn18";
-			this.dataGridViewTextBoxColumn18.ReadOnly = true;
-			this.dataGridViewTextBoxColumn18.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.dataGridViewTextBoxColumn18.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-			// 
 			// btnStat2
 			// 
 			this.btnStat2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -1381,30 +1384,26 @@
 			this.metroLabel3.TabIndex = 6;
 			this.metroLabel3.Text = "Legnagyobb készletű cikket tartalmazó raktárak:";
 			// 
-			// dataGridViewTextBoxColumn1
+			// dataGridViewTextBoxColumn15
 			// 
-			this.dataGridViewTextBoxColumn1.HeaderText = "Név";
-			this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-			this.dataGridViewTextBoxColumn1.ReadOnly = true;
+			this.dataGridViewTextBoxColumn15.HeaderText = "Eladások száma";
+			this.dataGridViewTextBoxColumn15.Name = "dataGridViewTextBoxColumn15";
+			this.dataGridViewTextBoxColumn15.ReadOnly = true;
 			// 
-			// dataGridViewTextBoxColumn2
+			// dataGridViewTextBoxColumn17
 			// 
-			this.dataGridViewTextBoxColumn2.HeaderText = "Ár";
-			this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-			this.dataGridViewTextBoxColumn2.ReadOnly = true;
+			this.dataGridViewTextBoxColumn17.HeaderText = "Partner";
+			this.dataGridViewTextBoxColumn17.Name = "dataGridViewTextBoxColumn17";
+			this.dataGridViewTextBoxColumn17.ReadOnly = true;
 			// 
-			// dataGridViewTextBoxColumn3
+			// dataGridViewTextBoxColumn18
 			// 
-			this.dataGridViewTextBoxColumn3.HeaderText = "Kategória";
-			this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-			this.dataGridViewTextBoxColumn3.ReadOnly = true;
-			this.dataGridViewTextBoxColumn3.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			// 
-			// dataGridViewTextBoxColumn4
-			// 
-			this.dataGridViewTextBoxColumn4.HeaderText = "Leírás";
-			this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-			this.dataGridViewTextBoxColumn4.ReadOnly = true;
+			dataGridViewCellStyle25.Format = "yyyy. MM. dd.";
+			this.dataGridViewTextBoxColumn18.DefaultCellStyle = dataGridViewCellStyle25;
+			this.dataGridViewTextBoxColumn18.HeaderText = "Dátum";
+			this.dataGridViewTextBoxColumn18.Name = "dataGridViewTextBoxColumn18";
+			this.dataGridViewTextBoxColumn18.ReadOnly = true;
+			this.dataGridViewTextBoxColumn18.Resizable = System.Windows.Forms.DataGridViewTriState.True;
 			// 
 			// MainForm
 			// 
@@ -1518,9 +1517,6 @@
 		private System.Windows.Forms.DataGridViewTextBoxColumn colPartnerDate;
 		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn16;
 		private System.Windows.Forms.DataGridViewTextBoxColumn colSell;
-		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn15;
-		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn17;
-		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn18;
 		private System.Windows.Forms.Panel panelStat1Holder;
 		private MetroFramework.Controls.MetroButton btnStat2;
 		private Controls.FixedDataGridView gridStat2;
@@ -1541,5 +1537,8 @@
 		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
 		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
 		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn15;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn17;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn18;
 	}
 }
