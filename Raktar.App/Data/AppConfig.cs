@@ -10,7 +10,8 @@
 			DatabaseName = "raktar",
 			DatabaseUser = "root",
 			DatabasePassword = "",
-			ODBCDriver = "MySQL ODBC 5.3 ANSI Driver"
+			ODBCDriver = "MySQL ODBC 5.3 ANSI Driver",
+			UIColor = "Blue"
 		};
 
 		public string DatabaseServer;
@@ -18,5 +19,7 @@
 		public string DatabaseUser;
 		public string DatabasePassword;
 		public string ODBCDriver;
+
+		public string UIColor;
 	}
 }

@@ -93,6 +93,12 @@ namespace Raktar.App.Forms
 
 			Global.Config = config;
 
+			MetroColorStyle colorStyle;
+			if(Enum.TryParse<MetroColorStyle>(config.UIColor, out colorStyle))
+			{
+				AppDesign.AppTheme = colorStyle;
+			}
+
 			SetStatus("Csatlakozás az adatbázishoz...");
 
 			try

@@ -2,6 +2,7 @@
 using Raktar.App.Data;
 using Raktar.Database;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
 
@@ -51,6 +52,12 @@ namespace Raktar.App.Forms
 			{
 				Warehouse wh = (Warehouse)row.Tag;
 
+				if (!CheckWarehouseUsage(wh))
+				{
+					Warning("A \"" + wh.Name + "\" nem törölhető mert 1 vagy több helyen is használva van!", "Hiba");
+					continue;
+				}
+
 				if (!Global.Database.DeleteFrom<Warehouse>("warehouse", wh))
 				{
 					Error("Hiba a sor törlése közben! \"" + wh.Name + "\"", "Hiba!");
@@ -59,6 +66,23 @@ namespace Raktar.App.Forms
 
 				gridWarehouse.Rows.Remove(row);
 			}
+		}
+
+		private bool CheckWarehouseUsage(Warehouse w)
+		{
+			if (Global.Database.Select<Stock>("stock", new Dictionary<string, object>() { { "WarehouseID", w.ID } }).Count > 0)
+				return false;
+
+			if (Global.Database.Select<Shipment>("shipment", new Dictionary<string, object>() { { "WarehouseFrom", w.ID } }).Count > 0)
+				return false;
+
+			if (Global.Database.Select<Shipment>("shipment", new Dictionary<string, object>() { { "WarehouseTo", w.ID } }).Count > 0)
+				return false;
+
+			if (Global.Database.Select<PartnerShipment>("partnershipment", new Dictionary<string, object>() { { "WarehouseID", w.ID } }).Count > 0)
+				return false;
+
+			return true;
 		}
 
 		private void btnNewWarehouse_Click(object sender, System.EventArgs e)
@@ -131,6 +155,12 @@ namespace Raktar.App.Forms
 			{
 				ItemWithCategory item = (ItemWithCategory)row.Tag;
 
+				if (!CheckItem(item))
+				{
+					Warning("A \"" + item.Name + "\" nem törölhető mert 1 vagy több helyen is használva van!", "Hiba");
+					continue;
+				}
+
 				if (!Global.Database.DeleteFrom<Item>("item", item))
 				{
 					Error("Hiba a sor törlése közben! \"" + item.Name + "\"", "Hiba!");
@@ -139,6 +169,20 @@ namespace Raktar.App.Forms
 
 				gridItems.Rows.Remove(row);
 			}
+		}
+
+		private bool CheckItem(ItemWithCategory item)
+		{
+			if (Global.Database.Select<Stock>("stock", new Dictionary<string, object>() { { "ItemID", item.ID } }).Count > 0)
+				return false;
+
+			if (Global.Database.Select<Shipment>("shipment", new Dictionary<string, object>() { { "ItemID", item.ID } }).Count > 0)
+				return false;
+
+			if (Global.Database.Select<PartnerShipment>("partnershipment", new Dictionary<string, object>() { { "ItemID", item.ID } }).Count > 0)
+				return false;
+
+			return true;
 		}
 
 		private void btnNewItem_Click(object sender, System.EventArgs e)

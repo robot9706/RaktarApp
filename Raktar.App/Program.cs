@@ -13,6 +13,23 @@ namespace Raktar.App
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
 
+# if DEBUG
+			Run();
+#else
+			try
+			{
+				Run();
+			}
+			catch(Exception ex)
+			{
+				SaveCrashLog(ex);
+				MessageBox.Show("Hiba történt az alkalmazás futása közben: " + ex.Message);
+			}
+#endif
+		}
+
+		static void Run()
+		{
 			bool applicationReady = false;
 			using (SplashForm splash = new SplashForm())
 			{

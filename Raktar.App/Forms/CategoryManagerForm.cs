@@ -61,6 +61,12 @@ namespace Raktar.App.Forms
 
 			foreach (Category toDelete in list)
 			{
+				if (Global.Database.Select<Item>("item", new Dictionary<string, object>() { { "CategoryID", toDelete.ID } }).Count > 0)
+				{
+					Warning("A \"" + toDelete.Name + "\" kategória nem törlöhető mert 1 vagy több cikk használja!", "Hiba");
+					continue;
+				}
+
 				if (Global.Database.DeleteFrom<Category>("category", toDelete))
 				{
 					listCategory.Items.Remove(toDelete);
