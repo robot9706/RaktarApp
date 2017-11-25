@@ -106,7 +106,7 @@ namespace Raktar.App.Forms
 
 			int originalCount = (int)tbNumber.Tag;
 
-			if (MetroMessageBox.Show(this, "Frissíteni akarja a cikk \""  + stock.WarehouseName + "\" raktárban lévő számát?\nEredeti darabszám: " + originalCount.ToString() +
+			if (MessageBox.Show(this, "Frissíteni akarja a cikk \""  + stock.WarehouseName + "\" raktárban lévő számát?\nEredeti darabszám: " + originalCount.ToString() +
 				"\nÚj darabszám: " + count.ToString(),
 				"Módosítás",
 				MessageBoxButtons.YesNo,

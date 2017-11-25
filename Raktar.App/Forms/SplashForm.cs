@@ -32,7 +32,7 @@ namespace Raktar.App.Forms
 				{
 					Program.SaveCrashLog(ex);
 
-					MetroMessageBox.Show(this, "Hiba történt az alkalmazás indítása közben. Az alkalmazás kilép.\nHiba: " + ex.Message, "Hiba");
+					MessageBox.Show(this, "Hiba történt az alkalmazás indítása közben. Az alkalmazás kilép.\nHiba: " + ex.Message, "Hiba");
 
 					Close(DialogResult.Abort);
 				}
@@ -79,7 +79,7 @@ namespace Raktar.App.Forms
 				}
 				catch
 				{
-					MetroMessageBox.Show(this, "Hibás az alkalmazás beállítás fájl! Az alapértelmezett beállítások lesznek használva.", "Hiba");
+					MessageBox.Show(this, "Hibás az alkalmazás beállítás fájl! Az alapértelmezett beállítások lesznek használva.", "Hiba");
 
 					config = AppConfig.Default;
 				}
@@ -109,7 +109,7 @@ namespace Raktar.App.Forms
 			}
 			catch (Exception ex)
 			{
-				MetroMessageBox.Show(this, "Nem lehet csatlakozni az adatbázis szerverhez.\nSzerver: " + config.DatabaseServer + "/" + config.DatabaseName + "\n" +
+				MessageBox.Show(this, "Nem lehet csatlakozni az adatbázis szerverhez.\nSzerver: " + config.DatabaseServer + "/" + config.DatabaseName + "\n" +
 					"Hiba: " + ex.Message + "\nAz alkalmazás kilép.", "Hiba");
 
 				return false;

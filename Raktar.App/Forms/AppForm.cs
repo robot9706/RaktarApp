@@ -8,17 +8,17 @@ namespace Raktar.App.Forms
 	{
 		public void Info(string info, string title)
 		{
-			MetroMessageBox.Show(this, info, title, MessageBoxButtons.OK, MessageBoxIcon.Information);
+			MessageBox.Show(this, info, title, MessageBoxButtons.OK, MessageBoxIcon.Information);
 		}
 
 		public void Warning(string info, string title)
 		{
-			MetroMessageBox.Show(this, info, title, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+			MessageBox.Show(this, info, title, MessageBoxButtons.OK, MessageBoxIcon.Warning);
 		}
 
 		public void Error(string info, string title)
 		{
-			MetroMessageBox.Show(this, info, title, MessageBoxButtons.OK, MessageBoxIcon.Error);
+			MessageBox.Show(this, info, title, MessageBoxButtons.OK, MessageBoxIcon.Error);
 		}
 	}
 }

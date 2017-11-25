@@ -1,5 +1,4 @@
-﻿using MetroFramework;
-using Raktar.App.Data;
+﻿using Raktar.App.Data;
 using Raktar.Database;
 using System;
 using System.Collections.Generic;
@@ -27,6 +26,8 @@ namespace Raktar.App.Forms
 				LoadStockTab();
 				LoadShipmentTab();
 				LoadPartnerShipmentTab();
+
+				tabs.SelectedIndex = 0;
 			}
 			ResumeLayout();
 		}
@@ -395,7 +396,7 @@ namespace Raktar.App.Forms
 
 		private void btnDeleteShipment_Click(object sender, EventArgs e)
 		{
-			if (MetroMessageBox.Show(this, "Biztosan törölni akarja a szállítmányt?", "Biztos?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+			if (MessageBox.Show(this, "Biztosan törölni akarja a szállítmányt?", "Biztos?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
 				return;
 
 			DataGridViewRow row = gridShipment.SelectedRows[0];
@@ -416,7 +417,7 @@ namespace Raktar.App.Forms
 
 		private void btnShipmentRevert_Click(object sender, EventArgs e)
 		{
-			if (MetroMessageBox.Show(this, "Biztosan vissza akarja vonni a szállítmányt?", "Biztos?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+			if (MessageBox.Show(this, "Biztosan vissza akarja vonni a szállítmányt?", "Biztos?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
 				return;
 
 			DataGridViewRow row = gridShipment.SelectedRows[0];
@@ -513,7 +514,7 @@ namespace Raktar.App.Forms
 
 		private void btnDeletePShipment_Click(object sender, EventArgs e)
 		{
-			if (MetroMessageBox.Show(this, "Biztosan törölni akarja a szállítmányt?", "Biztos?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+			if (MessageBox.Show(this, "Biztosan törölni akarja a szállítmányt?", "Biztos?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
 				return;
 
 			DataGridViewRow row = gridPartnerShipment.SelectedRows[0];
@@ -534,7 +535,7 @@ namespace Raktar.App.Forms
 
 		private void btnRevertPShipment_Click(object sender, EventArgs e)
 		{
-			if (MetroMessageBox.Show(this, "Biztosan vissza akarja vonni a szállítmányt?", "Biztos?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+			if (MessageBox.Show(this, "Biztosan vissza akarja vonni a szállítmányt?", "Biztos?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
 				return;
 
 			DataGridViewRow row = gridPartnerShipment.SelectedRows[0];
