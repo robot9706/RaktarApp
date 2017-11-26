@@ -35,7 +35,23 @@ namespace Raktar.App.Forms
 		#region Warehouse tab
 		private void LoadWarehouseTab()
 		{
-			DataGridManager.AddDataGridEntries<Warehouse>(gridWarehouse, Global.Database.SelectAll<Warehouse>("warehouse"));
+			int selectedEntryID = -1;
+			if (gridWarehouse.SelectedRows.Count > 0)
+			{
+				selectedEntryID = ((Warehouse)gridWarehouse.SelectedRows[0].Tag).ID;
+			}
+
+			DataGridManager.AddDataGridEntries<Warehouse>(gridWarehouse, Global.Database.SelectAll<Warehouse>("warehouse"), true, new Action<DataGridViewRow>(
+				(DataGridViewRow row) =>
+				{
+					Warehouse sum = (Warehouse)row.Tag;
+
+					if (selectedEntryID != -1 && sum.ID == selectedEntryID)
+					{
+						row.Selected = true;
+					}
+				}
+			));
 		}
 
 		private void gridWarehouse_SelectionChanged(object sender, System.EventArgs e)
@@ -133,12 +149,33 @@ namespace Raktar.App.Forms
 		{
 			gridWarehouse_CellDoubleClick(gridWarehouse, new DataGridViewCellEventArgs(0, gridWarehouse.SelectedRows[0].Index));
 		}
+
+		private void btnWarehouseRefresh_Click(object sender, EventArgs e)
+		{
+			LoadWarehouseTab();
+		}
 		#endregion
 
 		#region Items tab
 		private void LoadItemsTab()
 		{
-			DataGridManager.AddDataGridEntries<ItemWithCategory>(gridItems, ComplexQueries.GetItemsWithCategories());
+			int selectedEntryID = -1;
+			if (gridItems.SelectedRows.Count > 0)
+			{
+				selectedEntryID = ((ItemWithCategory)gridItems.SelectedRows[0].Tag).ID;
+			}
+
+			DataGridManager.AddDataGridEntries<ItemWithCategory>(gridItems, ComplexQueries.GetItemsWithCategories(), true, new Action<DataGridViewRow>(
+				(DataGridViewRow row) =>
+				{
+					ItemWithCategory sum = (ItemWithCategory)row.Tag;
+
+					if (selectedEntryID != -1 && sum.ID == selectedEntryID)
+					{
+						row.Selected = true;
+					}
+				}
+			));
 		}
 
 		private void gridItems_SelectionChanged(object sender, System.EventArgs e)
@@ -233,12 +270,33 @@ namespace Raktar.App.Forms
 		{
 			gridItems_CellDoubleClick(gridItems, new DataGridViewCellEventArgs(0, gridItems.SelectedRows[0].Index));
 		}
+
+		private void btnItemRefresh_Click(object sender, EventArgs e)
+		{
+			LoadItemsTab();
+		}
 		#endregion
 
 		#region Partners tab
 		private void LoadPartnersTab()
 		{
-			DataGridManager.AddDataGridEntries<Partner>(gridPartners, Global.Database.SelectAll<Partner>("partner"));
+			int selectedEntryID = -1;
+			if (gridPartners.SelectedRows.Count > 0)
+			{
+				selectedEntryID = ((Partner)gridPartners.SelectedRows[0].Tag).ID;
+			}
+
+			DataGridManager.AddDataGridEntries<Partner>(gridPartners, Global.Database.SelectAll<Partner>("partner"), true, new Action<DataGridViewRow>(
+				(DataGridViewRow row) =>
+				{
+					Partner sum = (Partner)row.Tag;
+
+					if (selectedEntryID != -1 && sum.ID == selectedEntryID)
+					{
+						row.Selected = true;
+					}
+				}
+			));
 		}
 
 		private void gridPartners_SelectionChanged(object sender, System.EventArgs e)
@@ -256,6 +314,13 @@ namespace Raktar.App.Forms
 			{
 				Partner partner = (Partner)row.Tag;
 
+				if (!CheckPartner(partner))
+				{
+					Warning("A \"" + partner.Name + "\" nem törölhető mert 1 vagy több helyen is használva van!", "Hiba");
+					continue;
+				}
+
+
 				if (!Global.Database.DeleteFrom<Partner>("partner", partner))
 				{
 					Error("Hiba a sor törlése közben! \"" + partner.Name + "\"", "Hiba!");
@@ -264,6 +329,14 @@ namespace Raktar.App.Forms
 
 				gridPartners.Rows.Remove(row);
 			}
+		}
+
+		private bool CheckPartner(Partner partner)
+		{
+			if (Global.Database.Select<PartnerShipment>("partnershipment", new Dictionary<string, object>() { { "PartnerID", partner.ID } }).Count > 0)
+				return false;
+
+			return true;
 		}
 
 		private void btnNewPartner_Click(object sender, System.EventArgs e)
@@ -312,6 +385,11 @@ namespace Raktar.App.Forms
 		private void btnEditPartner_Click(object sender, System.EventArgs e)
 		{
 			gridPartners_CellDoubleClick(gridPartners, new DataGridViewCellEventArgs(0, gridPartners.SelectedRows[0].Index));
+		}
+
+		private void btnPartnerRefresh_Click(object sender, EventArgs e)
+		{
+			LoadPartnersTab();
 		}
 		#endregion
 
@@ -363,15 +441,20 @@ namespace Raktar.App.Forms
 		{
 			gridStock_CellDoubleClick(gridStock, new DataGridViewCellEventArgs(0, gridStock.SelectedRows[0].Index));
 		}
+
+		private void btnStockRefresh_Click(object sender, EventArgs e)
+		{
+			LoadStockTab();
+		}
 		#endregion
 
 		#region Shipment tab
 		private void LoadShipmentTab()
 		{
-			int selectedEntryID = -1;
+			ShipmentSummary selectedEntry = null;
 			if (gridShipment.SelectedRows.Count > 0)
 			{
-				selectedEntryID = ((ShipmentSummary)gridShipment.SelectedRows[0].Tag).ItemID;
+				selectedEntry = ((ShipmentSummary)gridShipment.SelectedRows[0].Tag);
 			}
 
 			DataGridManager.AddDataGridEntries<ShipmentSummary>(gridShipment, ComplexQueries.GetShipmentSummary(), true, new Action<DataGridViewRow>(
@@ -379,7 +462,7 @@ namespace Raktar.App.Forms
 				{
 					ShipmentSummary sum = (ShipmentSummary)row.Tag;
 
-					if (selectedEntryID != -1 && sum.ItemID == selectedEntryID)
+					if (selectedEntry != null && sum.ItemID == selectedEntry.ItemID && sum.WarehouseFrom == selectedEntry.WarehouseFrom && sum.WarehouseTo == selectedEntry.WarehouseTo && sum.Date == selectedEntry.Date)
 					{
 						row.Selected = true;
 					}
@@ -481,15 +564,20 @@ namespace Raktar.App.Forms
 				}
 			}
 		}
+
+		private void btnShipmentRefresh_Click(object sender, EventArgs e)
+		{
+			LoadShipmentTab();
+		}
 		#endregion
 
 		#region PartnerShipment tab
 		private void LoadPartnerShipmentTab()
 		{
-			int selectedEntryID = -1;
+			PartnerShipmentSummary selectedEntry = null;
 			if (gridPartnerShipment.SelectedRows.Count > 0)
 			{
-				selectedEntryID = ((PartnerShipmentSummary)gridPartnerShipment.SelectedRows[0].Tag).ItemID;
+				selectedEntry = ((PartnerShipmentSummary)gridPartnerShipment.SelectedRows[0].Tag);
 			}
 
 			DataGridManager.AddDataGridEntries<PartnerShipmentSummary>(gridPartnerShipment, ComplexQueries.GetPartnerShipmentSummary(), true, new Action<DataGridViewRow>(
@@ -497,7 +585,7 @@ namespace Raktar.App.Forms
 				{
 					PartnerShipmentSummary sum = (PartnerShipmentSummary)row.Tag;
 
-					if (selectedEntryID != -1 && sum.ItemID == selectedEntryID)
+					if (selectedEntry != null && sum.ItemID == selectedEntry.ItemID && sum.PartnerID == selectedEntry.PartnerID && sum.WarehouseID == selectedEntry.WarehouseID && sum.Date == selectedEntry.Date)
 					{
 						row.Selected = true;
 					}
@@ -598,6 +686,11 @@ namespace Raktar.App.Forms
 					}
 				}
 			}
+		}
+
+		private void btnPShipmentRefresh_Click_1(object sender, EventArgs e)
+		{
+			LoadPartnerShipmentTab();
 		}
 		#endregion
 

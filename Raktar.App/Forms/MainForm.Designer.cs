@@ -54,13 +54,14 @@
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle29 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle30 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.tabs = new MetroFramework.Controls.MetroTabControl();
 			this.pageWarehouse = new System.Windows.Forms.TabPage();
 			this.panelWarehouseTab = new MetroFramework.Controls.MetroPanel();
+			this.btnWarehouseRefresh = new MetroFramework.Controls.MetroButton();
 			this.btnWarehouseEdit = new MetroFramework.Controls.MetroButton();
 			this.btnDeleteWarehouse = new MetroFramework.Controls.MetroButton();
 			this.btnNewWarehouse = new MetroFramework.Controls.MetroButton();
@@ -72,6 +73,7 @@
 			this.warehouseStreetNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.pageItems = new System.Windows.Forms.TabPage();
 			this.panelItems = new System.Windows.Forms.Panel();
+			this.btnItemRefresh = new MetroFramework.Controls.MetroButton();
 			this.btnEditItem = new MetroFramework.Controls.MetroButton();
 			this.btnDeleteItem = new MetroFramework.Controls.MetroButton();
 			this.btnNewItem = new MetroFramework.Controls.MetroButton();
@@ -82,6 +84,7 @@
 			this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.pagePartners = new System.Windows.Forms.TabPage();
 			this.panelPartners = new MetroFramework.Controls.MetroPanel();
+			this.btnPartnerRefresh = new MetroFramework.Controls.MetroButton();
 			this.btnEditPartner = new MetroFramework.Controls.MetroButton();
 			this.btnDeletePartner = new MetroFramework.Controls.MetroButton();
 			this.btnNewPartner = new MetroFramework.Controls.MetroButton();
@@ -95,12 +98,14 @@
 			this.columnStreetNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.pageStock = new System.Windows.Forms.TabPage();
 			this.panelStock = new System.Windows.Forms.Panel();
+			this.btnStockRefresh = new MetroFramework.Controls.MetroButton();
 			this.btnStockEdit = new MetroFramework.Controls.MetroButton();
 			this.gridStock = new Raktar.App.Controls.FixedDataGridView();
 			this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.pageShipment = new System.Windows.Forms.TabPage();
 			this.panelShipment = new System.Windows.Forms.Panel();
+			this.btnShipmentRefresh = new MetroFramework.Controls.MetroButton();
 			this.btnDeleteShipment = new MetroFramework.Controls.MetroButton();
 			this.btnShipmentRevert = new MetroFramework.Controls.MetroButton();
 			this.btnNewShipment = new MetroFramework.Controls.MetroButton();
@@ -112,6 +117,7 @@
 			this.colCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.pagePartnerShipment = new System.Windows.Forms.TabPage();
 			this.panelPartnerShipment = new System.Windows.Forms.Panel();
+			this.btnPShipmentRefresh = new MetroFramework.Controls.MetroButton();
 			this.btnDeletePShipment = new MetroFramework.Controls.MetroButton();
 			this.btnRevertPShipment = new MetroFramework.Controls.MetroButton();
 			this.btnNewPShipment = new MetroFramework.Controls.MetroButton();
@@ -131,6 +137,9 @@
 			this.dataGridViewTextBoxColumn21 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.panelStat1Holder = new System.Windows.Forms.Panel();
 			this.gridStat1 = new Raktar.App.Controls.FixedDataGridView();
+			this.dataGridViewTextBoxColumn15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.btnStat2 = new MetroFramework.Controls.MetroButton();
 			this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
 			this.btnStat1 = new MetroFramework.Controls.MetroButton();
@@ -143,9 +152,6 @@
 			this.dataGridViewTextBoxColumn22 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataGridViewTextBoxColumn23 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
-			this.dataGridViewTextBoxColumn15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewTextBoxColumn17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewTextBoxColumn18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.tabs.SuspendLayout();
 			this.pageWarehouse.SuspendLayout();
 			this.panelWarehouseTab.SuspendLayout();
@@ -192,7 +198,7 @@
 			this.tabs.Controls.Add(this.pageStats2);
 			this.tabs.Location = new System.Drawing.Point(25, 63);
 			this.tabs.Name = "tabs";
-			this.tabs.SelectedIndex = 7;
+			this.tabs.SelectedIndex = 5;
 			this.tabs.Size = new System.Drawing.Size(953, 541);
 			this.tabs.TabIndex = 0;
 			this.tabs.UseSelectable = true;
@@ -209,6 +215,7 @@
 			// panelWarehouseTab
 			// 
 			this.panelWarehouseTab.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.panelWarehouseTab.Controls.Add(this.btnWarehouseRefresh);
 			this.panelWarehouseTab.Controls.Add(this.btnWarehouseEdit);
 			this.panelWarehouseTab.Controls.Add(this.btnDeleteWarehouse);
 			this.panelWarehouseTab.Controls.Add(this.btnNewWarehouse);
@@ -224,6 +231,17 @@
 			this.panelWarehouseTab.VerticalScrollbarBarColor = true;
 			this.panelWarehouseTab.VerticalScrollbarHighlightOnWheel = false;
 			this.panelWarehouseTab.VerticalScrollbarSize = 10;
+			// 
+			// btnWarehouseRefresh
+			// 
+			this.btnWarehouseRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.btnWarehouseRefresh.Location = new System.Drawing.Point(3, 464);
+			this.btnWarehouseRefresh.Name = "btnWarehouseRefresh";
+			this.btnWarehouseRefresh.Size = new System.Drawing.Size(116, 30);
+			this.btnWarehouseRefresh.TabIndex = 6;
+			this.btnWarehouseRefresh.Text = "Lerkédezés";
+			this.btnWarehouseRefresh.UseSelectable = true;
+			this.btnWarehouseRefresh.Click += new System.EventHandler(this.btnWarehouseRefresh_Click);
 			// 
 			// btnWarehouseEdit
 			// 
@@ -363,6 +381,7 @@
 			// 
 			this.panelItems.BackColor = System.Drawing.Color.White;
 			this.panelItems.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.panelItems.Controls.Add(this.btnItemRefresh);
 			this.panelItems.Controls.Add(this.btnEditItem);
 			this.panelItems.Controls.Add(this.btnDeleteItem);
 			this.panelItems.Controls.Add(this.btnNewItem);
@@ -372,6 +391,17 @@
 			this.panelItems.Name = "panelItems";
 			this.panelItems.Size = new System.Drawing.Size(945, 499);
 			this.panelItems.TabIndex = 1;
+			// 
+			// btnItemRefresh
+			// 
+			this.btnItemRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.btnItemRefresh.Location = new System.Drawing.Point(3, 464);
+			this.btnItemRefresh.Name = "btnItemRefresh";
+			this.btnItemRefresh.Size = new System.Drawing.Size(116, 30);
+			this.btnItemRefresh.TabIndex = 8;
+			this.btnItemRefresh.Text = "Lerkédezés";
+			this.btnItemRefresh.UseSelectable = true;
+			this.btnItemRefresh.Click += new System.EventHandler(this.btnItemRefresh_Click);
 			// 
 			// btnEditItem
 			// 
@@ -502,6 +532,7 @@
 			// panelPartners
 			// 
 			this.panelPartners.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.panelPartners.Controls.Add(this.btnPartnerRefresh);
 			this.panelPartners.Controls.Add(this.btnEditPartner);
 			this.panelPartners.Controls.Add(this.btnDeletePartner);
 			this.panelPartners.Controls.Add(this.btnNewPartner);
@@ -517,6 +548,17 @@
 			this.panelPartners.VerticalScrollbarBarColor = true;
 			this.panelPartners.VerticalScrollbarHighlightOnWheel = false;
 			this.panelPartners.VerticalScrollbarSize = 10;
+			// 
+			// btnPartnerRefresh
+			// 
+			this.btnPartnerRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.btnPartnerRefresh.Location = new System.Drawing.Point(3, 464);
+			this.btnPartnerRefresh.Name = "btnPartnerRefresh";
+			this.btnPartnerRefresh.Size = new System.Drawing.Size(116, 30);
+			this.btnPartnerRefresh.TabIndex = 10;
+			this.btnPartnerRefresh.Text = "Lerkédezés";
+			this.btnPartnerRefresh.UseSelectable = true;
+			this.btnPartnerRefresh.Click += new System.EventHandler(this.btnPartnerRefresh_Click);
 			// 
 			// btnEditPartner
 			// 
@@ -669,6 +711,7 @@
 			// 
 			this.panelStock.BackColor = System.Drawing.Color.White;
 			this.panelStock.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.panelStock.Controls.Add(this.btnStockRefresh);
 			this.panelStock.Controls.Add(this.btnStockEdit);
 			this.panelStock.Controls.Add(this.gridStock);
 			this.panelStock.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -676,6 +719,17 @@
 			this.panelStock.Name = "panelStock";
 			this.panelStock.Size = new System.Drawing.Size(945, 499);
 			this.panelStock.TabIndex = 1;
+			// 
+			// btnStockRefresh
+			// 
+			this.btnStockRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.btnStockRefresh.Location = new System.Drawing.Point(3, 464);
+			this.btnStockRefresh.Name = "btnStockRefresh";
+			this.btnStockRefresh.Size = new System.Drawing.Size(116, 30);
+			this.btnStockRefresh.TabIndex = 11;
+			this.btnStockRefresh.Text = "Lerkédezés";
+			this.btnStockRefresh.UseSelectable = true;
+			this.btnStockRefresh.Click += new System.EventHandler(this.btnStockRefresh_Click);
 			// 
 			// btnStockEdit
 			// 
@@ -769,6 +823,7 @@
 			// 
 			this.panelShipment.BackColor = System.Drawing.Color.White;
 			this.panelShipment.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.panelShipment.Controls.Add(this.btnShipmentRefresh);
 			this.panelShipment.Controls.Add(this.btnDeleteShipment);
 			this.panelShipment.Controls.Add(this.btnShipmentRevert);
 			this.panelShipment.Controls.Add(this.btnNewShipment);
@@ -778,6 +833,17 @@
 			this.panelShipment.Name = "panelShipment";
 			this.panelShipment.Size = new System.Drawing.Size(945, 499);
 			this.panelShipment.TabIndex = 1;
+			// 
+			// btnShipmentRefresh
+			// 
+			this.btnShipmentRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.btnShipmentRefresh.Location = new System.Drawing.Point(3, 464);
+			this.btnShipmentRefresh.Name = "btnShipmentRefresh";
+			this.btnShipmentRefresh.Size = new System.Drawing.Size(116, 30);
+			this.btnShipmentRefresh.TabIndex = 12;
+			this.btnShipmentRefresh.Text = "Lerkédezés";
+			this.btnShipmentRefresh.UseSelectable = true;
+			this.btnShipmentRefresh.Click += new System.EventHandler(this.btnShipmentRefresh_Click);
 			// 
 			// btnDeleteShipment
 			// 
@@ -916,6 +982,7 @@
 			// 
 			this.panelPartnerShipment.BackColor = System.Drawing.Color.White;
 			this.panelPartnerShipment.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.panelPartnerShipment.Controls.Add(this.btnPShipmentRefresh);
 			this.panelPartnerShipment.Controls.Add(this.btnDeletePShipment);
 			this.panelPartnerShipment.Controls.Add(this.btnRevertPShipment);
 			this.panelPartnerShipment.Controls.Add(this.btnNewPShipment);
@@ -925,6 +992,17 @@
 			this.panelPartnerShipment.Name = "panelPartnerShipment";
 			this.panelPartnerShipment.Size = new System.Drawing.Size(945, 499);
 			this.panelPartnerShipment.TabIndex = 1;
+			// 
+			// btnPShipmentRefresh
+			// 
+			this.btnPShipmentRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.btnPShipmentRefresh.Location = new System.Drawing.Point(3, 464);
+			this.btnPShipmentRefresh.Name = "btnPShipmentRefresh";
+			this.btnPShipmentRefresh.Size = new System.Drawing.Size(116, 30);
+			this.btnPShipmentRefresh.TabIndex = 15;
+			this.btnPShipmentRefresh.Text = "Lerkédezés";
+			this.btnPShipmentRefresh.UseSelectable = true;
+			this.btnPShipmentRefresh.Click += new System.EventHandler(this.btnPShipmentRefresh_Click_1);
 			// 
 			// btnDeletePShipment
 			// 
@@ -1229,6 +1307,27 @@
 			this.gridStat1.Size = new System.Drawing.Size(426, 429);
 			this.gridStat1.TabIndex = 4;
 			// 
+			// dataGridViewTextBoxColumn15
+			// 
+			this.dataGridViewTextBoxColumn15.HeaderText = "Eladások száma";
+			this.dataGridViewTextBoxColumn15.Name = "dataGridViewTextBoxColumn15";
+			this.dataGridViewTextBoxColumn15.ReadOnly = true;
+			// 
+			// dataGridViewTextBoxColumn17
+			// 
+			this.dataGridViewTextBoxColumn17.HeaderText = "Partner";
+			this.dataGridViewTextBoxColumn17.Name = "dataGridViewTextBoxColumn17";
+			this.dataGridViewTextBoxColumn17.ReadOnly = true;
+			// 
+			// dataGridViewTextBoxColumn18
+			// 
+			dataGridViewCellStyle25.Format = "yyyy. MM. dd.";
+			this.dataGridViewTextBoxColumn18.DefaultCellStyle = dataGridViewCellStyle25;
+			this.dataGridViewTextBoxColumn18.HeaderText = "Dátum";
+			this.dataGridViewTextBoxColumn18.Name = "dataGridViewTextBoxColumn18";
+			this.dataGridViewTextBoxColumn18.ReadOnly = true;
+			this.dataGridViewTextBoxColumn18.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+			// 
 			// btnStat2
 			// 
 			this.btnStat2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -1384,27 +1483,6 @@
 			this.metroLabel3.TabIndex = 6;
 			this.metroLabel3.Text = "Legnagyobb készletű cikket tartalmazó raktárak:";
 			// 
-			// dataGridViewTextBoxColumn15
-			// 
-			this.dataGridViewTextBoxColumn15.HeaderText = "Eladások száma";
-			this.dataGridViewTextBoxColumn15.Name = "dataGridViewTextBoxColumn15";
-			this.dataGridViewTextBoxColumn15.ReadOnly = true;
-			// 
-			// dataGridViewTextBoxColumn17
-			// 
-			this.dataGridViewTextBoxColumn17.HeaderText = "Partner";
-			this.dataGridViewTextBoxColumn17.Name = "dataGridViewTextBoxColumn17";
-			this.dataGridViewTextBoxColumn17.ReadOnly = true;
-			// 
-			// dataGridViewTextBoxColumn18
-			// 
-			dataGridViewCellStyle25.Format = "yyyy. MM. dd.";
-			this.dataGridViewTextBoxColumn18.DefaultCellStyle = dataGridViewCellStyle25;
-			this.dataGridViewTextBoxColumn18.HeaderText = "Dátum";
-			this.dataGridViewTextBoxColumn18.Name = "dataGridViewTextBoxColumn18";
-			this.dataGridViewTextBoxColumn18.ReadOnly = true;
-			this.dataGridViewTextBoxColumn18.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1540,5 +1618,11 @@
 		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn15;
 		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn17;
 		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn18;
+		private MetroFramework.Controls.MetroButton btnWarehouseRefresh;
+		private MetroFramework.Controls.MetroButton btnItemRefresh;
+		private MetroFramework.Controls.MetroButton btnPartnerRefresh;
+		private MetroFramework.Controls.MetroButton btnStockRefresh;
+		private MetroFramework.Controls.MetroButton btnShipmentRefresh;
+		private MetroFramework.Controls.MetroButton btnPShipmentRefresh;
 	}
 }
