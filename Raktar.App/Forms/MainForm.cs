@@ -20,14 +20,21 @@ namespace Raktar.App.Forms
 		{
 			SuspendLayout();
 			{
-				LoadWarehouseTab();
-				LoadItemsTab();
-				LoadPartnersTab();
-				LoadStockTab();
-				LoadShipmentTab();
-				LoadPartnerShipmentTab();
+				try
+				{
+					LoadWarehouseTab();
+					LoadItemsTab();
+					LoadPartnersTab();
+					LoadStockTab();
+					LoadShipmentTab();
+					LoadPartnerShipmentTab();
 
-				tabs.SelectedIndex = 0;
+					tabs.SelectedIndex = 0;
+				}
+				catch(Exception ex)
+				{
+					MessageBox.Show(this, "Hiba az adatok betöltése közben: " + ex.Message, "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				}
 			}
 			ResumeLayout();
 		}
